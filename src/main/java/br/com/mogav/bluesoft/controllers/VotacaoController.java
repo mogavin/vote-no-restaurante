@@ -1,6 +1,7 @@
 package br.com.mogav.bluesoft.controllers;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Path;
 
 @Controller
 public class VotacaoController {
@@ -10,5 +11,6 @@ public class VotacaoController {
      */
     VotacaoController(){}
     
+    @Path({"", "/"})
     public void index(){};
 }
