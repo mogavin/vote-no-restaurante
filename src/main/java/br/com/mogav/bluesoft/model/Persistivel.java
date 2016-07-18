@@ -1,4 +1,4 @@
-package br.com.mogav.bluesoft.dao;
+package br.com.mogav.bluesoft.model;
 
 /**
  * Atribui um id à classe para que seja persistivel.
@@ -13,7 +13,6 @@ public abstract class Persistivel {
 	/**
 	 * @deprecated JPA eyes only
 	 */
-	//@Deprecated
 	Persistivel(){
 		this(null);
 	}
