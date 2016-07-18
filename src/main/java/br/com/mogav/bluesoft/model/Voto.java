@@ -1,10 +1,11 @@
 package br.com.mogav.bluesoft.model;
 
-public class Voto {
+public class Voto extends Persistivel{
 	
 	private final VotoType tipoVoto;
 	private final Restaurante restaurante;
 	
+	@SuppressWarnings("deprecation")
 	public Voto(VotoType tipoVoto, Restaurante restaurante) {
 		this.tipoVoto = tipoVoto;
 		this.restaurante = restaurante;
