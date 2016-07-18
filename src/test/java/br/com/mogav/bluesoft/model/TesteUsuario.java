@@ -1,9 +1,11 @@
 package br.com.mogav.bluesoft.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 public class TesteUsuario {
 
@@ -26,5 +28,10 @@ public class TesteUsuario {
 	@Test
 	public void obterNomeEmail(){
 		assertEquals(EMAIL, usuario.getEmail());
+	}
+	
+	@Test
+	public void verificaEqualsHashcode(){
+		EqualsVerifier.forClass(Usuario.class).verify();
 	}
 }
