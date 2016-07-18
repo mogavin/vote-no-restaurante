@@ -1,7 +1,7 @@
 package br.com.mogav.bluesoft.model;
 
 public enum Restaurante {
-	MCDONALDS ,
+	MCDONALDS,
 	SUBWAY,
 	WENDYS,
 	OUTBACK,
