@@ -5,8 +5,18 @@ public class Voto extends Persistivel{
 	private final VotoType tipoVoto;
 	private final Restaurante restaurante;
 	
-	@SuppressWarnings("deprecation")
+	/**
+	 * Construtor padrão.
+	 */
 	public Voto(VotoType tipoVoto, Restaurante restaurante) {
+		this(null, tipoVoto, restaurante);
+	}
+	
+	/**
+	 * Construtor para persistência.
+	 */
+	public Voto(Long id, VotoType tipoVoto, Restaurante restaurante) {
+		super(id);
 		this.tipoVoto = tipoVoto;
 		this.restaurante = restaurante;
 	}
