@@ -6,12 +6,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Map;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableList;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
@@ -20,13 +20,14 @@ import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.model.Voto;
 import br.com.mogav.bluesoft.service.VotacaoService;
 
 public class TesteVotacaoController {
 
-	private static final Map<Restaurante, Boolean> VOTOS_POR_RESTAURANTE = ImmutableMap.of(
-			Restaurante.GIRAFFAS, true,
-			Restaurante.SUBWAY, false
+	private static final Collection<Voto> VOTOS = ImmutableList.of(
+			new Voto(true, Restaurante.OUTBACK),
+			new Voto(false, Restaurante.WENDYS)
 	);
 	private static final Usuario USUARIO = new Usuario("Joao", "joao@email.com");
 	
@@ -51,9 +52,9 @@ public class TesteVotacaoController {
 	@Test
 	public void votar(){		
 		//Executamos o método a ser testado
-		this.controller.votar(USUARIO, VOTOS_POR_RESTAURANTE);		
+		this.controller.votar(USUARIO, VOTOS);		
 		
-		verify(mockService).registrarVoto(USUARIO, VOTOS_POR_RESTAURANTE);
+		verify(mockService).registrarVoto(USUARIO, VOTOS);
 		//Asseguramos que ocorra redirecionamento para a página de rankings
 		verify(mockRankingController).index();
 	}
@@ -61,10 +62,10 @@ public class TesteVotacaoController {
 	@Test(expected = ValidationException.class)
 	public void seOcorrerErrosNaVotacaoIncluirNaValidaco(){
 		
-		when(mockService.registrarVoto(USUARIO, VOTOS_POR_RESTAURANTE))
+		when(mockService.registrarVoto(USUARIO, VOTOS))
 			.thenThrow(new RuntimeException());
 		
 		//Executamos o método a ser testado
-		this.controller.votar(USUARIO, VOTOS_POR_RESTAURANTE);		
+		this.controller.votar(USUARIO, VOTOS);		
 	}
 }
