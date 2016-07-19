@@ -9,7 +9,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 
 public class TesteVoto {
 
-	private final VotoType TIPO_VOTO = VotoType.NEGATIVO;
+	private final boolean TIPO_VOTO = false;
 	private final Restaurante RESTAURANTE = Restaurante.MCDONALDS;
 	private Voto voto;
 	
@@ -21,7 +21,7 @@ public class TesteVoto {
 	
 	@Test
 	public void obterTipoDoVoto(){
-		assertEquals(TIPO_VOTO, voto.getTipoVoto());
+		assertEquals(TIPO_VOTO, voto.isPositivo());
 	}
 	
 	@Test

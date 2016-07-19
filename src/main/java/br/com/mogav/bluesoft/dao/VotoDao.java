@@ -15,7 +15,7 @@ public class VotoDao implements Dao<Voto>{
 										
 	
 	public Voto salvar(Voto voto) {
-		Voto aSalvar = new Voto(CHAVE_DISPONIVEL, voto.getTipoVoto(), voto.getRestaurante());
+		Voto aSalvar = new Voto(CHAVE_DISPONIVEL, voto.isPositivo(), voto.getRestaurante());
 		TABELA.put(CHAVE_DISPONIVEL, aSalvar);
 		CHAVE_DISPONIVEL++;
 		

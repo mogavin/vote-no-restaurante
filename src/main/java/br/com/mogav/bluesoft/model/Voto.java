@@ -2,28 +2,28 @@ package br.com.mogav.bluesoft.model;
 
 public class Voto extends Persistivel{
 	
-	private final VotoType tipoVoto;
+	private final boolean isPositivo;
 	private final Restaurante restaurante;
 	
 	/**
 	 * Construtor padrão.
 	 */
-	public Voto(VotoType tipoVoto, Restaurante restaurante) {
-		this(null, tipoVoto, restaurante);
+	public Voto(boolean isPositivo, Restaurante restaurante) {
+		this(null, isPositivo, restaurante);
 	}
 	
 	/**
 	 * Construtor para persistência.
 	 */
-	public Voto(Long id, VotoType tipoVoto, Restaurante restaurante) {
+	public Voto(Long id, boolean isPositivo, Restaurante restaurante) {
 		super(id);
-		this.tipoVoto = tipoVoto;
+		this.isPositivo = isPositivo;
 		this.restaurante = restaurante;
 	}
 
 	
-	public VotoType getTipoVoto() {
-		return this.tipoVoto;
+	public boolean isPositivo() {
+		return this.isPositivo;
 	}
 
 	public Restaurante getRestaurante() {
@@ -34,8 +34,8 @@ public class Voto extends Persistivel{
 	public final int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (isPositivo ? 1231 : 1237);
 		result = prime * result + ((restaurante == null) ? 0 : restaurante.hashCode());
-		result = prime * result + ((tipoVoto == null) ? 0 : tipoVoto.hashCode());
 		return result;
 	}
 
@@ -48,10 +48,10 @@ public class Voto extends Persistivel{
 		if (!(obj instanceof Voto))
 			return false;
 		Voto other = (Voto) obj;
+		if (isPositivo != other.isPositivo)
+			return false;
 		if (restaurante != other.restaurante)
 			return false;
-		if (tipoVoto != other.tipoVoto)
-			return false;
 		return true;
-	}	
+	}		
 }

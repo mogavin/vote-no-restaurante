@@ -8,17 +8,16 @@ import org.apache.commons.collections.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
+
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Voto;
-import br.com.mogav.bluesoft.model.VotoType;
-
-import com.google.common.collect.ImmutableList;
 
 public class TesteVotoDao {
 	
 	private static final List<Voto> VOTOS = ImmutableList.of(
-			new Voto(VotoType.POSITIVO, Restaurante.OUTBACK),
-			new Voto(VotoType.NEGATIVO, Restaurante.WENDYS)
+			new Voto(true, Restaurante.OUTBACK),
+			new Voto(false, Restaurante.WENDYS)
 	);
 	
 	private VotoDao dao;
