@@ -1,10 +1,20 @@
 package br.com.mogav.bluesoft.model;
 
-public class Usuario {
+public class Usuario extends Persistivel{
 
 	private final String nome;
 	private final String email;
 	
+	
+	/**
+	 * @deprecated JPA eyes only
+	 */
+	@Deprecated
+	Usuario(){
+		this(null, null);
+	}
+	
+	@SuppressWarnings("deprecation")
 	public Usuario(String nome, String email) {
 		this.nome = nome;
 		this.email = email;

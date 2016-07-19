@@ -1,15 +1,25 @@
 package br.com.mogav.bluesoft.model;
 
-public class Voto {
+public class Voto extends Persistivel{
 	
 	private final VotoType tipoVoto;
 	private final Restaurante restaurante;
 	
+	/**
+	 * @deprecated JPA eyes only
+	 */
+	@Deprecated
+	Voto(){
+		this(null, null);
+	}
+	
+	@SuppressWarnings("deprecation")
 	public Voto(VotoType tipoVoto, Restaurante restaurante) {
 		this.tipoVoto = tipoVoto;
 		this.restaurante = restaurante;
 	}
 
+	
 	public VotoType getTipoVoto() {
 		return this.tipoVoto;
 	}
