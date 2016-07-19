@@ -1,6 +1,7 @@
 package br.com.mogav.bluesoft.dao;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Voto;
@@ -32,6 +34,15 @@ public class TesteVotoDao {
 	public void salvarNovoVoto(){		
 		Voto salvo = dao.salvar(VOTOS.get(0));
 		assertNotNull(salvo.getId());
+	}
+	
+	@Test
+	public void salvarMaisDeUmVoto(){		
+		List<Voto> salvos = Lists.newArrayList(dao.salvarVotos(VOTOS));		
+		
+		if(salvos.isEmpty()) fail();		
+		for(Voto salvo : salvos)
+			assertNotNull(salvo.getId());
 	}
 	
 	@Test
