@@ -18,37 +18,41 @@
     <![endif]-->
     
     <style>
+    	.carousel .row{
+    		height: 100vh;
+    	}
+    	
     	.carousel.slide img {
 		    width: 100%;
 		    height: 100% !important;
 		}
+		
 		.nopadding {
 		   padding: 0;
 		}
+		
 		.img-container{
 		    height:100%;
 		    max-height:1000px;
+		}
+		
+		.voto{
+			cursor:pointer;
 		}
     </style>
   </head>
   <body>
     <div id="carousel-example-generic" class="carousel slide">
-	  <!-- Indicators -->
-	  <ol class="carousel-indicators">
-	    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-	  </ol>
-	
 	  <!-- Wrapper for slides -->
 		<div class="carousel-inner">
 		     <!-- Slide -->
 		  <div class="item active">
 	       <div class="row">
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container">
-	              	<img src="http://placehold.it/1280x720" alt="" class="voto voto-positivo" data-restaurante="A"/>
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="A">
+	              	<img src="http://placehold.it/1280x720" alt=""/>
 	           </div>
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container">
-	               <img src="http://placehold.it/1280x720" alt="" class="voto voto-positivo" data-restaurante="B"/>
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="B">
+	               <img src="http://placehold.it/1280x720" alt=""/>
 	           </div>
 	           <div class="carousel-caption">Qual dos dois você mais gosta ?</div>
 	       </div>
