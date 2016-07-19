@@ -13,7 +13,6 @@ public abstract class Persistivel {
 	/**
 	 * @deprecated JPA eyes only
 	 */
-	//@Deprecated
 	Persistivel(){
 		this(null);
 	}

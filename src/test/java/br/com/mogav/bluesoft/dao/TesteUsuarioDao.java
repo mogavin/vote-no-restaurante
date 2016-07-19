@@ -1,19 +1,24 @@
 package br.com.mogav.bluesoft.dao;
 
-import java.util.Arrays;
-import java.util.Collection;
+import static org.junit.Assert.*;
 
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.mogav.bluesoft.model.Usuario;
 
+import com.google.common.collect.ImmutableList;
+
 public class TesteUsuarioDao {
-	
-	private static final Collection<Usuario> USUARIOS = Arrays.<Usuario>asList(
+
+	private static final List<Usuario> USUARIOS = ImmutableList.of(
 			new Usuario("Joao", "joao@email.com"),
 			new Usuario("Pedro", "pedro@email.com")
 	);
+	
 	private UsuarioDao dao;
 	
 	@Before
@@ -23,8 +28,16 @@ public class TesteUsuarioDao {
 	
 	
 	@Test
-	public void listarTodos(){		
+	public void salvarNovoUsuario(){		
+		Usuario salvo = dao.salvar(USUARIOS.get(0));
+		assertNotNull(salvo.getId());
+	}
+	
+	@Test
+	public void listarTodos(){
 		dao.salvar(USUARIOS.get(0));
 		dao.salvar(USUARIOS.get(1));
+		
+		CollectionUtils.isEqualCollection(USUARIOS, dao.listarTodos());
 	}
 }

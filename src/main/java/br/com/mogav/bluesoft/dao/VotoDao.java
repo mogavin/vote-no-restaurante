@@ -4,25 +4,26 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.model.Voto;
 
 import com.google.common.collect.Maps;
 
-public class UsuarioDao implements Dao<Usuario>{
+public class VotoDao implements Dao<Voto>{
 
 	private static Long CHAVE_DISPONIVEL = 1L;
-	private static final Map<Long, Usuario> TABELA = Maps.newHashMap();
+	private static final Map<Long, Voto> TABELA = Maps.newHashMap();
 										
 	
-	public Usuario salvar(Usuario usuario) {
-		Usuario aSalvar = new Usuario(CHAVE_DISPONIVEL, usuario.getNome(), usuario.getEmail());
+	public Voto salvar(Voto voto) {
+		Voto aSalvar = new Voto(CHAVE_DISPONIVEL, voto.getTipoVoto(), voto.getRestaurante());
 		TABELA.put(CHAVE_DISPONIVEL, aSalvar);
 		CHAVE_DISPONIVEL++;
 		
 		return aSalvar;
 	}
 
-	public Collection<Usuario> listarTodos() {
+	public Collection<Voto> listarTodos() {
 		return Collections.unmodifiableCollection(TABELA.values());
 	}
+
 }

@@ -6,15 +6,17 @@ public class Voto extends Persistivel{
 	private final Restaurante restaurante;
 	
 	/**
-	 * @deprecated JPA eyes only
+	 * Construtor padrão.
 	 */
-	@Deprecated
-	Voto(){
-		this(null, null);
+	public Voto(VotoType tipoVoto, Restaurante restaurante) {
+		this(null, tipoVoto, restaurante);
 	}
 	
-	@SuppressWarnings("deprecation")
-	public Voto(VotoType tipoVoto, Restaurante restaurante) {
+	/**
+	 * Construtor para persistência.
+	 */
+	public Voto(Long id, VotoType tipoVoto, Restaurante restaurante) {
+		super(id);
 		this.tipoVoto = tipoVoto;
 		this.restaurante = restaurante;
 	}
