@@ -12,7 +12,7 @@ public class Usuario extends Persistivel{
 	 * Construtor padrão.
 	 */
 	public Usuario(String nome, String email) {
-		this(null, nome, nome);
+		this(null, nome, email);
 	}
 	
 	/**
