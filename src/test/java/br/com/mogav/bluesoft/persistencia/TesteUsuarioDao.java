@@ -43,9 +43,8 @@ public class TesteUsuarioDao {
 	}
 	
 	@Test
-	public void buscarPorEmail(){
-		
-		Usuario aSalvar = USUARIOS.get(0);		
+	public void buscarPorEmail(){		
+		Usuario aSalvar = USUARIOS.get(0);	
 		dao.salvar(aSalvar);
 
 		assertEquals(aSalvar, dao.buscarPorEmail(aSalvar.getEmail()));

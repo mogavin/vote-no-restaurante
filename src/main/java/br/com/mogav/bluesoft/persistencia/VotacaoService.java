@@ -52,6 +52,11 @@ public class VotacaoService {
 	}
 	
 	public List<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {
+		
+		Usuario encontrado = this.usuarioDao.buscarPorEmail(usuario.getEmail());
+		//Se for usuário novo, salva
+		encontrado = (encontrado == null) ? this.usuarioDao.salvar(usuario) : encontrado;
+		
 		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.listarRankingUsuario(usuario);
 		List<ItemRankingVotos> rankingUsuario = VotacaoService.obterItemsRanking(respostaDao);
 		
@@ -59,6 +64,11 @@ public class VotacaoService {
 	}
 	
 	
+	
+	/**
+	 * Converte um mapa de mapas de votos por restaurante em uma lista de instências de 'ItemRankingVotos'.
+	 * 
+	 */
 	private static List<ItemRankingVotos> obterItemsRanking
 					(Map<Restaurante, Map<Integer, Integer>> mapaItemsRanking){
 		

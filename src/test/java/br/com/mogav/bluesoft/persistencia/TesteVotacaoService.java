@@ -84,7 +84,8 @@ public class TesteVotacaoService {
 		Map<Restaurante, Map<Integer, Integer>> respostaDao = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
 			Restaurante.OUTBACK, ImmutableMap.of(3, 5),
 			Restaurante.MCDONALDS, ImmutableMap.of(8, 1)
-		);		
+		);
+		when(mockUsuarioDao.buscarPorEmail(USUARIO_CADASTRADO.getEmail())).thenReturn(USUARIO_CADASTRADO);
 		when(mockVotoDao.listarRankingUsuario(USUARIO_CADASTRADO)).thenReturn(respostaDao);
 		
 		//Executamos o método a ser testado
@@ -99,9 +100,12 @@ public class TesteVotacaoService {
 	public void seUsuarioForNovoDeveCadastrarAntesDeListarOSeuRanking(){
 		Usuario novo = new Usuario("Pedro", "pedro@email.com");//Sem id
 		
+		when(mockUsuarioDao.buscarPorEmail(novo.getEmail())).thenReturn(null);
+		
 		//Executamos o método a ser testado
 		service.listarRankingUsuario(novo);
 		
+		//Asseguramos que o novo usuario tenha sido salvo
 		verify(mockUsuarioDao).salvar(novo);
 	}
 }
