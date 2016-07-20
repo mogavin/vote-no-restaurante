@@ -96,7 +96,7 @@ public class TesteVotacaoService {
 	}
 	
 	@Test
-	public void seUsuarioForNovoDeveCadastrarAntasDeListarOSeuRanking(){
+	public void seUsuarioForNovoDeveCadastrarAntesDeListarOSeuRanking(){
 		Usuario novo = new Usuario("Pedro", "pedro@email.com");//Sem id
 		
 		//Executamos o método a ser testado

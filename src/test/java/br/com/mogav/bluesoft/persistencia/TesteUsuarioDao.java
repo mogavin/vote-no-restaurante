@@ -1,6 +1,6 @@
 package br.com.mogav.bluesoft.persistencia;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -40,5 +40,14 @@ public class TesteUsuarioDao {
 		dao.salvar(USUARIOS.get(1));
 		
 		CollectionUtils.isEqualCollection(USUARIOS, dao.listarTodos());
+	}
+	
+	@Test
+	public void buscarPorEmail(){
+		
+		Usuario aSalvar = USUARIOS.get(0);		
+		dao.salvar(aSalvar);
+
+		assertEquals(aSalvar, dao.buscarPorEmail(aSalvar.getEmail()));
 	}
 }

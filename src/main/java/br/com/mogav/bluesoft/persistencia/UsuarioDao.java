@@ -28,4 +28,15 @@ public class UsuarioDao implements Dao<Usuario>{
 	public Collection<Usuario> listarTodos() {
 		return Collections.unmodifiableCollection(TABELA.values());
 	}
+
+	public Usuario buscarPorEmail(String email) {		
+		Usuario encontrado = null;		
+		for(Usuario usuario : TABELA.values()){
+			if(usuario.getEmail().equals(email)){
+				encontrado = usuario; break;
+			}
+		}
+		
+		return encontrado;
+	}
 }
