@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -102,6 +103,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="<c:url value="/js/jquery.redirect.js"/>"></script>
     
     <script>
     	$carousel = $('#carousel-example-generic');
@@ -136,7 +138,7 @@
 		     
 		     //Obtemos os dados do usuario
 		     var data = montarDadosParaSubmeterForm(mapaVotos, usuario);
-			 $.post("votacao/votar", data);
+			 $.redirect("votacao/votar", data);//POST por padrão no plugin 'jquery.redirect'
 		});
 		
 		function montarDadosParaSubmeterForm(votos, usuario){			
@@ -150,7 +152,8 @@
 			var i = 0;
 			for(var restaurante in mapaVotos){
 				console.log(restaurante + " : " + mapaVotos[restaurante]);
-				data["votos[{I}].usuario".replace("{I}", i)] = null;
+				//Usuario será definido no servidor. Setado como 'undefined' pois 'null' não inclui o atributo 
+				data["votos[{I}].usuario".replace("{I}", i)] = undefined;
 				data["votos[{I}].isPositivo".replace("{I}", i)] = mapaVotos[restaurante];
 				data["votos[{I}].restaurante".replace("{I}", i)] = restaurante;
 				i++;

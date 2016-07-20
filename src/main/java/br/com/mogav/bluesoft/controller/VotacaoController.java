@@ -39,14 +39,15 @@ public class VotacaoController {
     public void index(){}
 
     @Post
-	public void votar(Usuario usuario, Collection<Voto> votos) {		
-		try{
+	public void votar(Usuario usuario, Collection<Voto> votos) {    	
+    	
+    	try{
 			this.service.registrarVotos(usuario, votos);
 		}catch(RuntimeException ex){
 			this.validator.add(new SimpleMessage("erro", ex.getMessage()));
 		}
 		
-		this.result.redirectTo(RankingController.class).index(usuario);
 		this.validator.onErrorRedirectTo(RankingController.class).index(usuario);
+		this.result.redirectTo(RankingController.class).index(usuario);
 	};
 }
