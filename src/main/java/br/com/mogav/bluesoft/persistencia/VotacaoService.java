@@ -2,6 +2,7 @@ package br.com.mogav.bluesoft.persistencia;
 
 import java.util.Collection;
 
+import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 
@@ -22,11 +23,11 @@ public class VotacaoService {
 		return true;		
 	}
 	
-	public Collection<Voto> listarRankingGeral() {
+	public Collection<ItemRankingVotos> listarRankingGeral() {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 	
-	public Collection<Voto> listarRankingUsuario(Usuario usuario) {
+	public Collection<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 }

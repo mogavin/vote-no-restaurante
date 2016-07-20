@@ -14,9 +14,9 @@ import com.google.common.collect.Sets;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
+import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
-import br.com.mogav.bluesoft.model.Voto;
 import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 public class TesteRankingController {
@@ -38,13 +38,13 @@ public class TesteRankingController {
 	@Test
 	public void exibirRankingsDeVotos(){
 			
-		Collection<Voto> rankingGeral = Sets.newHashSet(
-			new Voto(USUARIO, true, Restaurante.OUTBACK),
-			new Voto(USUARIO, false, Restaurante.WENDYS)
+		Collection<ItemRankingVotos> rankingGeral = Sets.newHashSet(
+			new ItemRankingVotos(Restaurante.MCDONALDS, 5, 9),
+			new ItemRankingVotos(Restaurante.WENDYS, 4, 0)
 		);		
-		Collection<Voto> rankingUsuario = Sets.newHashSet(
-			new Voto(USUARIO, false, Restaurante.MCDONALDS),
-			new Voto(USUARIO, true, Restaurante.GIRAFFAS)
+		Collection<ItemRankingVotos> rankingUsuario = Sets.newHashSet(
+			new ItemRankingVotos(Restaurante.SUBWAY, 1, 7),
+			new ItemRankingVotos(Restaurante.OUTBACK, 0, 0)
 		);
 		
 		when(mockService.listarRankingGeral()).thenReturn(rankingGeral);
@@ -55,6 +55,6 @@ public class TesteRankingController {
 		controller.index(USUARIO);
 		
 		assertEquals(rankingGeral, spyResult.included().get("rankingGeral"));
-		assertEquals(rankingGeral, spyResult.included().get("rankingUsuario"));
+		assertEquals(rankingUsuario, spyResult.included().get("rankingUsuario"));
 	}
 }

@@ -3,8 +3,8 @@ package br.com.mogav.bluesoft.controller;
 import java.util.Collection;
 
 import br.com.caelum.vraptor.Result;
+import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Usuario;
-import br.com.mogav.bluesoft.model.Voto;
 import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 public class RankingController {
@@ -17,8 +17,10 @@ public class RankingController {
 		this.service = service;
 	}
 
-	public void index(Usuario usuario) {		
-		Collection<Voto> rankingGeral = this.service.listarRankingGeral();
-		this.result.include("rankingVotos", rankingGeral);
+	public void index(Usuario usuario) {
+		Collection<ItemRankingVotos> rankingUsuario = this.service.listarRankingUsuario(usuario);
+		Collection<ItemRankingVotos> rankingGeral = this.service.listarRankingGeral();
+		this.result.include("rankingUsuario", rankingUsuario);
+		this.result.include("rankingGeral", rankingGeral);
 	}
 }
