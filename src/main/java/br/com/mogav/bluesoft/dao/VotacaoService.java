@@ -1,9 +1,7 @@
-package br.com.mogav.bluesoft.service;
+package br.com.mogav.bluesoft.dao;
 
 import java.util.Collection;
 
-import br.com.mogav.bluesoft.dao.UsuarioDao;
-import br.com.mogav.bluesoft.dao.VotoDao;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 
@@ -22,5 +20,13 @@ public class VotacaoService {
 		this.votoDao.salvarVotos(votos);
 		
 		return true;		
+	}
+	
+	public Collection<Voto> listarRankingGeral() {
+		throw new UnsupportedOperationException("Método não implementado, ainda");
+	}
+	
+	public Collection<Voto> listarRankingUsuario(Usuario usuario) {
+		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 }

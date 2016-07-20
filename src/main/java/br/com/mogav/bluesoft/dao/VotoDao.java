@@ -36,8 +36,12 @@ public class VotoDao implements Dao<Voto>{
 	public Collection<Voto> listarTodos() {
 		return Collections.unmodifiableCollection(TABELA.values());
 	}
+		
+	Collection<Voto> listarRankingGeral() {
+		throw new UnsupportedOperationException("Método não implementado, ainda");
+	}
 	
-	public Collection<Voto> listarRankingGeral() {
+	Collection<Voto> listarRankingUsuario(Long idUsuario) {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 }

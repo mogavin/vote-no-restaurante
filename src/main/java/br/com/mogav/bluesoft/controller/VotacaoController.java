@@ -7,9 +7,9 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.mogav.bluesoft.dao.VotacaoService;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
-import br.com.mogav.bluesoft.service.VotacaoService;
 
 @Controller
 public class VotacaoController {
@@ -42,7 +42,7 @@ public class VotacaoController {
 			this.validator.add(new SimpleMessage("erro", ex.getMessage()));
 		}
 		
-		this.result.redirectTo(RankingController.class).index();
-		this.validator.onErrorRedirectTo(RankingController.class).index();
+		this.result.redirectTo(RankingController.class).index(usuario);
+		this.validator.onErrorRedirectTo(RankingController.class).index(usuario);
 	};
 }

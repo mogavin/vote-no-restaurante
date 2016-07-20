@@ -18,10 +18,10 @@ import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
 import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.mogav.bluesoft.dao.VotacaoService;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
-import br.com.mogav.bluesoft.service.VotacaoService;
 
 public class TesteVotacaoController {
 
@@ -59,7 +59,7 @@ public class TesteVotacaoController {
 		
 		verify(mockService).registrarVoto(USUARIO, VOTOS);
 		//Asseguramos que ocorra redirecionamento para a página de rankings
-		verify(mockRankingController).index();
+		verify(mockRankingController).index(USUARIO);
 	}
 	
 	@Test(expected = ValidationException.class)
