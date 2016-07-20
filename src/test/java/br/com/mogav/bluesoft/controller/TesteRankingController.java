@@ -5,12 +5,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
@@ -38,11 +38,11 @@ public class TesteRankingController {
 	@Test
 	public void exibirRankingsDeVotos(){
 			
-		Collection<ItemRankingVotos> rankingGeral = Sets.newHashSet(
+		List<ItemRankingVotos> rankingGeral = Lists.newArrayList(
 			new ItemRankingVotos(Restaurante.MCDONALDS, 5, 9),
 			new ItemRankingVotos(Restaurante.WENDYS, 4, 0)
 		);		
-		Collection<ItemRankingVotos> rankingUsuario = Sets.newHashSet(
+		List<ItemRankingVotos> rankingUsuario = Lists.newArrayList(
 			new ItemRankingVotos(Restaurante.SUBWAY, 1, 7),
 			new ItemRankingVotos(Restaurante.OUTBACK, 0, 0)
 		);

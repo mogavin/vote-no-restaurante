@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Voto;
 
 import com.google.common.collect.Maps;
@@ -37,11 +38,11 @@ public class VotoDao implements Dao<Voto>{
 		return Collections.unmodifiableCollection(TABELA.values());
 	}
 		
-	Collection<Voto> listarRankingGeral() {
+	Map<Restaurante, Map<Integer, Integer>> listarRankingGeral() {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 	
-	Collection<Voto> listarRankingUsuario(Long idUsuario) {
+	Map<Restaurante, Map<Integer, Integer>> listarRankingUsuario(Long idUsuario) {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 }
