@@ -14,10 +14,13 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.mogav.bluesoft.dao.VotoDao;
 import br.com.mogav.bluesoft.model.Restaurante;
+import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 
 public class TesteRankingController {
 
+	private static final Usuario USUARIO = new Usuario("Joao", "joao@email.com");
+	
 	private Result spyResult;
 	private VotoDao mockVotoDao;
 	private RankingController controller;
@@ -31,14 +34,14 @@ public class TesteRankingController {
 	
 	
 	@Test
-	public void exibirRankingDeVotos(){
+	public void exibirRankingGeralDeVotos(){
 		
 		Collection<Voto> rankingVotos = Sets.newHashSet(
-			new Voto(true, Restaurante.OUTBACK),
-			new Voto(false, Restaurante.WENDYS)
+			new Voto(USUARIO, true, Restaurante.OUTBACK),
+			new Voto(USUARIO, false, Restaurante.WENDYS)
 		);
 		
-		when(mockVotoDao.listarRanking()).thenReturn(rankingVotos);
+		when(mockVotoDao.listarRankingGeral()).thenReturn(rankingVotos);
 		
 		//Executamos o método a ser testado
 		controller.index();

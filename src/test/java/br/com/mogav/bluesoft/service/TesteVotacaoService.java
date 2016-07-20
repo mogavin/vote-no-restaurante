@@ -19,11 +19,11 @@ import br.com.mogav.bluesoft.model.Voto;
 
 public class TesteVotacaoService {
 
-	private static final Collection<Voto> VOTOS = ImmutableList.of(
-			new Voto(true, Restaurante.OUTBACK),
-			new Voto(false, Restaurante.WENDYS)
-	);
 	private static final Usuario USUARIO = new Usuario("Joao", "joao@email.com");
+	private static final Collection<Voto> VOTOS = ImmutableList.of(
+			new Voto(USUARIO, true, Restaurante.OUTBACK),
+			new Voto(USUARIO, false, Restaurante.WENDYS)
+	);
 	
 	private UsuarioDao mockUsuarioDao;
 	private VotoDao mockVotoDao;

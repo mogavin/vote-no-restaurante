@@ -16,7 +16,7 @@ public class VotoDao implements Dao<Voto>{
 										
 	
 	public Voto salvar(Voto voto) {
-		Voto aSalvar = new Voto(CHAVE_DISPONIVEL, voto.isPositivo(), voto.getRestaurante());
+		Voto aSalvar = new Voto(CHAVE_DISPONIVEL, voto.getUsuario(), voto.isPositivo(), voto.getRestaurante());
 		TABELA.put(CHAVE_DISPONIVEL, aSalvar);
 		CHAVE_DISPONIVEL++;
 		
@@ -37,7 +37,7 @@ public class VotoDao implements Dao<Voto>{
 		return Collections.unmodifiableCollection(TABELA.values());
 	}
 	
-	public Collection<Voto> listarRanking() {
+	public Collection<Voto> listarRankingGeral() {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 }

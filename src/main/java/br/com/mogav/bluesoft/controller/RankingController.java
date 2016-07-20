@@ -17,7 +17,7 @@ public class RankingController {
 	}
 
 	public void index() {		
-		Collection<Voto> rankingVotos = this.votoDao.listarRanking();
+		Collection<Voto> rankingVotos = this.votoDao.listarRankingGeral();
 		this.result.include("rankingVotos", rankingVotos);
 	}
 }

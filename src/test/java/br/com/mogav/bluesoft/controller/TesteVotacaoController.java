@@ -25,11 +25,11 @@ import br.com.mogav.bluesoft.service.VotacaoService;
 
 public class TesteVotacaoController {
 
-	private static final Collection<Voto> VOTOS = ImmutableList.of(
-			new Voto(true, Restaurante.OUTBACK),
-			new Voto(false, Restaurante.WENDYS)
-	);
 	private static final Usuario USUARIO = new Usuario("Joao", "joao@email.com");
+	private static final Collection<Voto> VOTOS = ImmutableList.of(
+			new Voto(USUARIO, true, Restaurante.OUTBACK),
+			new Voto(USUARIO, false, Restaurante.WENDYS)
+	);
 	
 	private RankingController mockRankingController;
 	private Validator spyValidator;
