@@ -48,10 +48,10 @@
 		     <!-- Slide -->
 		  <div class="item active">
 	       <div class="row">
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="A">
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="MCDONALDS">
 	              	<img src="http://placehold.it/1280x720" alt=""/>
 	           </div>
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="B">
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="SUBWAY">
 	               <img src="http://placehold.it/1280x720" alt=""/>
 	           </div>
 	           <div class="carousel-caption">Qual dos dois você mais gosta ?</div>
@@ -63,8 +63,8 @@
 			        <div class="col-sm-12 col-xs-12 nopadding img-container">
 			            <img src="http://placehold.it/1280x720" alt=""/>
 			            <div class="carousel-caption">
-			            	<button type="button" class="btn btn-primary voto voto-positivo" data-restaurante="C">Primary</button>
-			            	<button type="button" class="btn btn-danger voto voto-negativo" data-restaurante="C">Danger</button>
+			            	<button type="button" class="btn btn-primary voto voto-positivo" data-restaurante="WENDYS">Primary</button>
+			            	<button type="button" class="btn btn-danger voto voto-negativo" data-restaurante="WENDYS">Danger</button>
 			            </div>
 			        </div>
 			    </div>
@@ -73,7 +73,7 @@
 			<div class="item">
 			    <div class="row">
 			        <div class="col-sm-12 col-xs-12 nopadding img-container">
-			            <form class="form-horizontal">
+			            <form id="form-usuario" class="form-horizontal">
 						  <div class="form-group">
 						    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 						    <div class="col-sm-8">
@@ -88,7 +88,7 @@
 						  </div>
 						  <div class="form-group">
 						    <div class="col-sm-offset-2 col-sm-8">
-						      <button type="submit" class="btn btn-primary">Sign in</button>
+						      <button class="btn btn-primary">Sign in</button>
 						    </div>
 						  </div>
 						</form>
@@ -113,17 +113,51 @@
     		$carousel.carousel('next');
     	});
     	
-    	var votos = {};
+    	var mapaVotos = {};
     	$(".voto-positivo").click(function(){
     		var restaurante = $(this).attr("data-restaurante");
-    		votos[restaurante] = true;
-    		alert(JSON.stringify(votos, null, 4));
+    		mapaVotos[restaurante] = true;
+    		alert(JSON.stringify(mapaVotos, null, 4));
     	});
 		$(".voto-negativo").click(function(){
 			var restaurante = $(this).attr("data-restaurante");
-    		votos[restaurante] = false;
-    		alert(JSON.stringify(votos, null, 4));
+			mapaVotos[restaurante] = false;
+    		alert(JSON.stringify(mapaVotos, null, 4));
     	});
+				
+		$("form#form-usuario").submit(function(e){
+		     e.preventDefault(); //Prevent the normal submission action
+		     var form = this;
+		     
+		     var usuario = {
+		    	nome : $("input[id='inputPassword3']",form).val(),
+		    	email : $("input[id='inputEmail3']",form).val()
+		     }
+		     
+		     //Obtemos os dados do usuario
+		     var data = montarDadosParaSubmeterForm(mapaVotos, usuario);
+			 $.post("votacao/votar", data);
+		});
+		
+		function montarDadosParaSubmeterForm(votos, usuario){			
+			var data = {};
+			
+			//Popula dados do usuario
+			data["usuario.nome"] = usuario.nome;
+			data["usuario.email"] = usuario.email;
+			
+			//Popula dados dos votos
+			var i = 0;
+			for(var restaurante in mapaVotos){
+				console.log(restaurante + " : " + mapaVotos[restaurante]);
+				data["votos[{I}].usuario".replace("{I}", i)] = null;
+				data["votos[{I}].isPositivo".replace("{I}", i)] = mapaVotos[restaurante];
+				data["votos[{I}].restaurante".replace("{I}", i)] = restaurante;
+				i++;
+			}
+			
+			return data;
+		} 
     </script>
   </body>
 </html>
