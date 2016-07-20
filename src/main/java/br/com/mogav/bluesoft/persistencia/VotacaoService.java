@@ -31,13 +31,27 @@ public class VotacaoService {
 		return true;		
 	}
 	
-	public List<ItemRankingVotos> listarRankingGeral() {
-		
-		List<ItemRankingVotos> rankingGeral = Lists.newArrayList();
-		
+	public List<ItemRankingVotos> listarRankingGeral() {		
 		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.listarRankingGeral();
+		List<ItemRankingVotos> rankingGeral = VotacaoService.obterItemsRanking(respostaDao);
 		
-		Table<Restaurante, Integer, Integer> tableRespostaDao = VotacaoService.table(respostaDao);		
+		return rankingGeral;
+	}
+	
+	public List<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {
+		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.listarRankingUsuario(usuario);
+		List<ItemRankingVotos> rankingUsuario = VotacaoService.obterItemsRanking(respostaDao);
+		
+		return rankingUsuario;
+	}
+	
+	
+	private static List<ItemRankingVotos> obterItemsRanking
+					(Map<Restaurante, Map<Integer, Integer>> mapaItemsRanking){
+		
+		List<ItemRankingVotos> rankingGeral = Lists.newArrayList();		
+	
+		Table<Restaurante, Integer, Integer> tableRespostaDao = VotacaoService.table(mapaItemsRanking);		
 		for (Cell<Restaurante, Integer, Integer> cell: tableRespostaDao.cellSet()){
 			Restaurante restaurante = cell.getRowKey();
 			Integer qtdVotosPositivos = cell.getColumnKey();
@@ -49,11 +63,10 @@ public class VotacaoService {
 		return rankingGeral;
 	}
 	
-	public List<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {
-		throw new UnsupportedOperationException("Método não implementado, ainda");
-	}
-	
-	
+	/**
+	 * Converte um mapa de mapas em uma instância 'Table', do Guava.
+	 * 
+	 */
 	private static <R, C, V> Table<R, C, V> table(Map<R, Map<C, V>> fromTable)
 	{
 	    Table<R, C, V> table = HashBasedTable.create();

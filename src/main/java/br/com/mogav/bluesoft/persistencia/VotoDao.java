@@ -4,11 +4,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import br.com.mogav.bluesoft.model.Restaurante;
-import br.com.mogav.bluesoft.model.Voto;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
+import br.com.mogav.bluesoft.model.Restaurante;
+import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.model.Voto;
 
 public class VotoDao implements Dao<Voto>{
 
@@ -42,7 +43,7 @@ public class VotoDao implements Dao<Voto>{
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 	
-	Map<Restaurante, Map<Integer, Integer>> listarRankingUsuario(Long idUsuario) {
+	Map<Restaurante, Map<Integer, Integer>> listarRankingUsuario(Usuario usuario) {
 		throw new UnsupportedOperationException("Método não implementado, ainda");
 	}
 }
