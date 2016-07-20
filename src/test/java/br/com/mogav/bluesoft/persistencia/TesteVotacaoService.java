@@ -15,9 +15,6 @@ import com.google.common.collect.ImmutableList;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
-import br.com.mogav.bluesoft.persistencia.UsuarioDao;
-import br.com.mogav.bluesoft.persistencia.VotacaoService;
-import br.com.mogav.bluesoft.persistencia.VotoDao;
 
 public class TesteVotacaoService {
 
