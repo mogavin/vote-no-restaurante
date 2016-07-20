@@ -1,10 +1,7 @@
 package br.com.mogav.bluesoft.persistencia;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,11 +21,11 @@ import br.com.mogav.bluesoft.model.Voto;
 
 public class TesteVotacaoService {
 
-	private static final Usuario USUARIO = new Usuario(1L, "Joao", "joao@email.com");
+	private static final Usuario USUARIO_CADASTRADO = new Usuario(1L, "Joao", "joao@email.com");
 	
 	private static final Collection<Voto> VOTOS = ImmutableSet.of(
-			new Voto(USUARIO, true, Restaurante.OUTBACK),
-			new Voto(USUARIO, false, Restaurante.SUBWAY)
+			new Voto(USUARIO_CADASTRADO, true, Restaurante.OUTBACK),
+			new Voto(USUARIO_CADASTRADO, false, Restaurante.SUBWAY)
 	);	
 	
 	private UsuarioDao mockUsuarioDao;
@@ -46,10 +43,10 @@ public class TesteVotacaoService {
 	@Test
 	public void registrarVotoComSucesso(){
 		//Executamos o método a ser testado
-		boolean respostaObtida = this.service.registrarVoto(USUARIO, VOTOS);
+		boolean respostaObtida = this.service.registrarVoto(USUARIO_CADASTRADO, VOTOS);
 		
 		assertTrue(respostaObtida);
-		verify(mockUsuarioDao).salvar(USUARIO);
+		verify(mockUsuarioDao).salvar(USUARIO_CADASTRADO);
 		verify(mockVotoDao).salvarVotos(VOTOS);
 	}
 	
@@ -88,12 +85,23 @@ public class TesteVotacaoService {
 			Restaurante.OUTBACK, ImmutableMap.of(3, 5),
 			Restaurante.MCDONALDS, ImmutableMap.of(8, 1)
 		);		
-		when(mockVotoDao.listarRankingUsuario(USUARIO)).thenReturn(respostaDao);
+		when(mockVotoDao.listarRankingUsuario(USUARIO_CADASTRADO)).thenReturn(respostaDao);
 		
 		//Executamos o método a ser testado
-		List<ItemRankingVotos> respostaObtida = service.listarRankingUsuario(USUARIO);
+		List<ItemRankingVotos> respostaObtida = service.listarRankingUsuario(USUARIO_CADASTRADO);
 		
-		
+		//Asseguramos que usuarios cadastrados nao sejam salvos novamente
+		verify(mockUsuarioDao, never()).salvar(USUARIO_CADASTRADO);
 		assertEquals(respostaEsperada, respostaObtida);
+	}
+	
+	@Test
+	public void seUsuarioForNovoDeveCadastrarAntasDeListarOSeuRanking(){
+		Usuario novo = new Usuario("Pedro", "pedro@email.com");//Sem id
+		
+		//Executamos o método a ser testado
+		service.listarRankingUsuario(novo);
+		
+		verify(mockUsuarioDao).salvar(novo);
 	}
 }
