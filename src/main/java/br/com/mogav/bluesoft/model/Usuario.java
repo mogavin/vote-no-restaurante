@@ -1,11 +1,25 @@
 package br.com.mogav.bluesoft.model;
 
-public class Usuario {
+
+
+public class Usuario extends Persistivel{
 
 	private final String nome;
 	private final String email;
 	
+
+	/**
+	 * Construtor padrão.
+	 */
 	public Usuario(String nome, String email) {
+		this(null, nome, email);
+	}
+	
+	/**
+	 * Construtor para persistência.
+	 */
+	public Usuario(Long id, String nome, String email) {
+		super(id);
 		this.nome = nome;
 		this.email = email;
 	}

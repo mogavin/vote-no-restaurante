@@ -9,19 +9,25 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 
 public class TesteVoto {
 
-	private final VotoType TIPO_VOTO = VotoType.NEGATIVO;
+	private static final Usuario USUARIO = new Usuario("Joao", "joao@email.com");
+	private final boolean TIPO_VOTO = false;
 	private final Restaurante RESTAURANTE = Restaurante.MCDONALDS;
 	private Voto voto;
 	
 	@Before
 	public void setup(){
-		this.voto = new Voto(TIPO_VOTO, RESTAURANTE);
+		this.voto = new Voto(USUARIO, TIPO_VOTO, RESTAURANTE);
 	}
 	
 	
 	@Test
+	public void obterDonoDoVoto(){
+		assertEquals(USUARIO, voto.getUsuario());
+	}
+	
+	@Test
 	public void obterTipoDoVoto(){
-		assertEquals(TIPO_VOTO, voto.getTipoVoto());
+		assertEquals(TIPO_VOTO, voto.isPositivo());
 	}
 	
 	@Test
