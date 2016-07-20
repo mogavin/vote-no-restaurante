@@ -1,4 +1,4 @@
-package br.com.mogav.bluesoft.dao;
+package br.com.mogav.bluesoft.persistencia;
 
 import java.util.Collection;
 

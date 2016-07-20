@@ -14,10 +14,10 @@ import com.google.common.collect.Sets;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
-import br.com.mogav.bluesoft.dao.VotacaoService;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
+import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 public class TesteRankingController {
 

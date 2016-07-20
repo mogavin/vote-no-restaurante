@@ -1,4 +1,4 @@
-package br.com.mogav.bluesoft.dao;
+package br.com.mogav.bluesoft.persistencia;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 
 import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.persistencia.UsuarioDao;
 
 public class TesteUsuarioDao {
 

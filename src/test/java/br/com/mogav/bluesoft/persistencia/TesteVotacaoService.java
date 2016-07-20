@@ -1,4 +1,4 @@
-package br.com.mogav.bluesoft.dao;
+package br.com.mogav.bluesoft.persistencia;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -15,6 +15,9 @@ import com.google.common.collect.ImmutableList;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
+import br.com.mogav.bluesoft.persistencia.UsuarioDao;
+import br.com.mogav.bluesoft.persistencia.VotacaoService;
+import br.com.mogav.bluesoft.persistencia.VotoDao;
 
 public class TesteVotacaoService {
 

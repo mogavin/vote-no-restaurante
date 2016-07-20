@@ -3,9 +3,9 @@ package br.com.mogav.bluesoft.controller;
 import java.util.Collection;
 
 import br.com.caelum.vraptor.Result;
-import br.com.mogav.bluesoft.dao.VotacaoService;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
+import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 public class RankingController {
 	

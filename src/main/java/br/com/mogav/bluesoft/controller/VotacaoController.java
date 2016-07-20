@@ -7,9 +7,9 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.mogav.bluesoft.dao.VotacaoService;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
+import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 @Controller
 public class VotacaoController {

@@ -18,10 +18,10 @@ import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
 import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.mogav.bluesoft.dao.VotacaoService;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
+import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 public class TesteVotacaoController {
 
