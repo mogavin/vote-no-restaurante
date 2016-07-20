@@ -1,6 +1,10 @@
 package br.com.mogav.bluesoft.controller;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Collection;
 
@@ -8,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
