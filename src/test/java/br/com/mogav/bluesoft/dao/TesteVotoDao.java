@@ -52,5 +52,9 @@ public class TesteVotoDao {
 		
 		CollectionUtils.isEqualCollection(VOTOS, dao.listarTodos());
 	}
-
+	
+	@Test
+	public void listarTodosPorRanking(){
+		fail();
+	}
 }
