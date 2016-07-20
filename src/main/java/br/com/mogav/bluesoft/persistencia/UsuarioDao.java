@@ -4,10 +4,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import br.com.mogav.bluesoft.model.Usuario;
+import javax.enterprise.context.RequestScoped;
 
 import com.google.common.collect.Maps;
 
+import br.com.mogav.bluesoft.model.Usuario;
+
+@RequestScoped
 public class UsuarioDao implements Dao<Usuario>{
 
 	private static Long CHAVE_DISPONIVEL = 1L;

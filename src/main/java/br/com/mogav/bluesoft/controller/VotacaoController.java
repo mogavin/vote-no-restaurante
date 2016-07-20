@@ -2,6 +2,8 @@ package br.com.mogav.bluesoft.controller;
 
 import java.util.Collection;
 
+import javax.inject.Inject;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
@@ -25,6 +27,7 @@ public class VotacaoController {
     	this(null, null, null);
     }
     
+    @Inject
     VotacaoController(Result result, Validator validator, VotacaoService service){
     	this.result = result;
     	this.validator = validator;

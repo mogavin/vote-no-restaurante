@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
+
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -11,6 +13,7 @@ import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 
+@RequestScoped
 public class VotoDao implements Dao<Voto>{
 
 	private static Long CHAVE_DISPONIVEL = 1L;

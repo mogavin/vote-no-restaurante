@@ -2,6 +2,8 @@ package br.com.mogav.bluesoft.controller;
 
 import java.util.Collection;
 
+import javax.inject.Inject;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
@@ -10,6 +12,7 @@ import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.persistencia.VotacaoService;
 
 @Controller
+@Path("/ranking")
 public class RankingController {
 	
 	private final Result result;
@@ -22,6 +25,7 @@ public class RankingController {
     	this(null, null);
     }
 
+	@Inject
 	public RankingController(Result result, VotacaoService service) {
 		this.result = result;
 		this.service = service;

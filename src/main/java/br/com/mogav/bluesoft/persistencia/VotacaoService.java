@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
@@ -14,16 +17,26 @@ import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 
+@RequestScoped
 public class VotacaoService {
 	
 	private final UsuarioDao usuarioDao;
 	private final VotoDao votoDao;
+	
+	 /**
+     * @deprecated CDI eyes only
+     */
+	VotacaoService(){
+    	this(null, null);
+    }
 
+	@Inject
 	public VotacaoService(UsuarioDao usuarioDao, VotoDao votoDao) {
 		this.usuarioDao = usuarioDao;
 		this.votoDao = votoDao;
 	}
 
+	
 	public boolean registrarVoto(Usuario usuario, Collection<Voto> votos){		
 		this.usuarioDao.salvar(usuario);
 		this.votoDao.salvarVotos(votos);
