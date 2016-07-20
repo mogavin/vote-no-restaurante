@@ -49,10 +49,10 @@
 		     <!-- Slide -->
 		  <div class="item active">
 	       <div class="row">
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="MCDONALDS">
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="MCDONALDS" data-inverse="SUBWAY">
 	              	<img src="http://placehold.it/1280x720" alt=""/>
 	           </div>
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="SUBWAY">
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="SUBWAY" data-inverse="MCDONALDS">
 	               <img src="http://placehold.it/1280x720" alt=""/>
 	           </div>
 	           <div class="carousel-caption">Qual dos dois você mais gosta ?</div>
@@ -117,8 +117,11 @@
     	
     	var mapaVotos = {};
     	$(".voto-positivo").click(function(){
-    		var restaurante = $(this).attr("data-restaurante");
-    		mapaVotos[restaurante] = true;
+    		var restauranteVotoPositivo = $(this).attr("data-restaurante");
+    		mapaVotos[restauranteVotoPositivo] = true;
+    		//Se houver mais de uma opção, vota negativo pela outra
+    		var restauranteVotoNegativo = $(this).attr("data-inverse");    		
+    		if(restauranteVotoNegativo) mapaVotos[restauranteVotoNegativo] = false;
     		alert(JSON.stringify(mapaVotos, null, 4));
     	});
 		$(".voto-negativo").click(function(){
