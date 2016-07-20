@@ -57,7 +57,7 @@ public class TesteVotacaoController {
 		//Executamos o método a ser testado
 		this.controller.votar(USUARIO, VOTOS);		
 		
-		verify(mockService).registrarVoto(USUARIO, VOTOS);
+		verify(mockService).registrarVotos(USUARIO, VOTOS);
 		//Asseguramos que ocorra redirecionamento para a página de rankings
 		verify(mockRankingController).index(USUARIO);
 	}
@@ -65,7 +65,7 @@ public class TesteVotacaoController {
 	@Test(expected = ValidationException.class)
 	public void seOcorrerErrosNaVotacaoIncluirNaValidaco(){
 		
-		when(mockService.registrarVoto(USUARIO, VOTOS))
+		when(mockService.registrarVotos(USUARIO, VOTOS))
 			.thenThrow(new RuntimeException());
 		
 		//Executamos o método a ser testado

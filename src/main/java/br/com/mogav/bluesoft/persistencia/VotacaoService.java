@@ -7,15 +7,17 @@ import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Table;
-import com.google.common.collect.Table.Cell;
-
 import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
+
+import com.google.common.collect.ImmutableTable;
+import com.google.common.collect.ImmutableTable.Builder;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+import com.google.common.collect.Table.Cell;
 
 @RequestScoped
 public class VotacaoService {
@@ -37,9 +39,18 @@ public class VotacaoService {
 	}
 
 	
-	public boolean registrarVoto(Usuario usuario, Collection<Voto> votos){		
-		this.usuarioDao.salvar(usuario);
-		this.votoDao.salvarVotos(votos);
+	public boolean registrarVotos(Usuario usuario, Collection<Voto> votos){
+		
+		//Se for usuário novo, salva
+		Usuario encontrado = this.usuarioDao.buscarPorEmail(usuario.getEmail());
+		encontrado = (encontrado == null) ? this.usuarioDao.salvar(usuario) : encontrado;
+		
+		Collection<Voto> votosRegistrados = Sets.newHashSet();
+		
+		for(Voto voto : votos)
+			votosRegistrados.add(new Voto(encontrado, voto.isPositivo(), voto.getRestaurante()));			
+
+		this.votoDao.salvarVotos(votosRegistrados);
 		
 		return true;		
 	}
@@ -51,12 +62,7 @@ public class VotacaoService {
 		return rankingGeral;
 	}
 	
-	public List<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {
-		
-		Usuario encontrado = this.usuarioDao.buscarPorEmail(usuario.getEmail());
-		//Se for usuário novo, salva
-		encontrado = (encontrado == null) ? this.usuarioDao.salvar(usuario) : encontrado;
-		
+	public List<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {		
 		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.listarRankingUsuario(usuario);
 		List<ItemRankingVotos> rankingUsuario = VotacaoService.obterItemsRanking(respostaDao);
 		
@@ -92,16 +98,16 @@ public class VotacaoService {
 	 */
 	private static <R, C, V> Table<R, C, V> table(Map<R, Map<C, V>> fromTable)
 	{
-	    Table<R, C, V> table = HashBasedTable.create();
+		Builder<R, C, V> tableBuilder = ImmutableTable.builder();
 	    for (R rowKey : fromTable.keySet())
 	    {
 	        Map<C, V> rowMap = fromTable.get(rowKey);
 	        for (C columnKey : rowMap.keySet())
 	        {
 	            V value = rowMap.get(columnKey);
-	            table.put(rowKey, columnKey, value);
+	            tableBuilder.put(rowKey, columnKey, value);
 	        }
 	    }
-	    return table;
+	    return tableBuilder.build();
 	}
 }
