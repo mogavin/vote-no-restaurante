@@ -13,6 +13,13 @@ import br.com.mogav.bluesoft.model.Usuario;
 @RequestScoped
 public class UsuarioDao extends JPADao<Usuario>{							
 	
+	/**
+     * @deprecated CDI eyes only
+     */
+	UsuarioDao(){
+    	this(null);
+    }
+	
 	@Inject
 	public UsuarioDao(EntityManager em){
 		super(em, Usuario.class);

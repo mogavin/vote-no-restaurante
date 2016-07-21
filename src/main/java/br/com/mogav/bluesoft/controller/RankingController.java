@@ -1,7 +1,6 @@
 package br.com.mogav.bluesoft.controller;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -34,8 +33,8 @@ public class RankingController {
 
 	@Path({"", "/"})
 	public void index(Usuario usuario) {
-		Collection<ItemRankingVotos> rankingUsuario = Collections.emptyList();//this.service.listarRankingUsuario(usuario);
-		Collection<ItemRankingVotos> rankingGeral = Collections.emptyList();//this.service.listarRankingGeral();
+		Collection<ItemRankingVotos> rankingUsuario = this.service.listarRankingUsuario(usuario);
+		Collection<ItemRankingVotos> rankingGeral = this.service.listarRankingGeral();
 		this.result.include("rankingUsuario", rankingUsuario);
 		this.result.include("rankingGeral", rankingGeral);
 	}

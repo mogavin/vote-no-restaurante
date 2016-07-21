@@ -19,6 +19,13 @@ import br.com.mogav.bluesoft.model.Voto;
 
 @RequestScoped
 public class VotoDao extends JPADao<Voto>{
+	
+	/**
+     * @deprecated CDI eyes only
+     */
+	VotoDao(){
+    	this(null);
+    }
 
 	@Inject
 	public VotoDao(EntityManager em){

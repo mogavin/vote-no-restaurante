@@ -16,7 +16,7 @@
 			<property name="hibernate.dialect" value="${hibernate.dialect}"/>
 			<property name="hibernate.show_sql" value="${hibernate.show_sql}"/>
 			<property name="hibernate.format_sql" value="${hibernate.format_sql}"/>
-			<property name="hibernate.physical_naming_strategy" value="br.com.mogav.newsletter.util.CustomNamingStrategy"/>
+			<property name="hibernate.physical_naming_strategy" value="br.com.mogav.bluesoft.util.CustomNamingStrategy"/>
 			<!-- Scan for annotated classes and Hibernate mapping XML files -->
 			<property name="hibernate.archive.autodetection" value="class, hbm"/>   		  
 			<!-- C3P0 -->
