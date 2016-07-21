@@ -1,10 +1,10 @@
 package br.com.mogav.bluesoft.persistencia;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
@@ -173,13 +174,50 @@ public class TesteVotoDao{
 		CollectionUtils.isEqualCollection(votosGeral, votoDao.listarTodos());
 	}
 	
+	//Ranking geral: 
+	//1o - OUTBACK(3 positivos, 0 negativos)
+	//2o - MCDONALDS(3 positivos, 1 negativos)
+	//3o - SUBWAY(2 positivos, 1 negativos)
+	//4o - WENDYS(2 positivos, 2 negativos)
+	//5o - GIRAFFAS(2 positivos, 2 negativos)
 	@Test
 	public void listarRankingGeral(){
-		fail();
+		
+		Map<Restaurante, Map<Integer, Integer>> respostaEsperada = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
+				Restaurante.OUTBACK, ImmutableMap.of(3, 0),
+				Restaurante.MCDONALDS, ImmutableMap.of(3, 1),
+				Restaurante.SUBWAY, ImmutableMap.of(2, 1),
+				Restaurante.WENDYS, ImmutableMap.of(2, 2),
+				Restaurante.GIRAFFAS, ImmutableMap.of(2, 2)
+		);
+		
+		votoDao.salvarVotos(votosGeral);
+		
+		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.listarRankingGeral();
+		
+		assertEquals(respostaEsperada, respostaObtida);
 	}
 	
+	//Ranking usuario 1: 
+	//1o - OUTBACK(2 positivos, 0 negativos)
+	//2o - SUBWAY(1 positivos, 0 negativos)
+	//3o - GIRAFFAS(2 positivos, 1 negativos)
+	//4o - MCDONALDS(1 positivos, 1 negativos)
+	//5o - WENDYS(0 positivos, 1 negativos)
 	@Test
 	public void listarRankingUsuario(){
-		fail();
+		Map<Restaurante, Map<Integer, Integer>> respostaEsperada = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
+				Restaurante.OUTBACK, ImmutableMap.of(2, 0),
+				Restaurante.SUBWAY, ImmutableMap.of(1, 0),
+				Restaurante.GIRAFFAS, ImmutableMap.of(2, 1),
+				Restaurante.MCDONALDS, ImmutableMap.of(1, 1),
+				Restaurante.WENDYS, ImmutableMap.of(0, 1)
+		);
+		
+		votoDao.salvarVotos(votosGeral);
+		
+		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.listarRankingUsuario(usuario_1);
+		
+		assertEquals(respostaEsperada, respostaObtida);
 	}
 }

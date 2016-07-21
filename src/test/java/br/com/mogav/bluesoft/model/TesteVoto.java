@@ -34,9 +34,4 @@ public class TesteVoto {
 	public void obterRestaurante(){
 		assertEquals(RESTAURANTE, voto.getRestaurante());
 	}
-	
-	@Test
-	public void verificaEqualsHashcode(){
-		EqualsVerifier.forClass(Voto.class).verify();
-	}
 }

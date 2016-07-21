@@ -1,18 +1,23 @@
 package br.com.mogav.bluesoft.persistencia;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 
 import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Restaurante;
@@ -40,22 +45,27 @@ public class TesteVotacaoService {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void registrarNovosVotosDeUsuariosJaRegistrados(){
 		
-		Collection<Voto> votosRegistrados = ImmutableSet.of(
-			new Voto(USUARIO_CADASTRADO, VOTOS_NAO_REGISTRADOS.get(0).isPositivo(), VOTOS_NAO_REGISTRADOS.get(0).getRestaurante()),
-			new Voto(USUARIO_CADASTRADO, VOTOS_NAO_REGISTRADOS.get(1).isPositivo(), VOTOS_NAO_REGISTRADOS.get(1).getRestaurante())
-		);
-		
+		//Mocks necessários para o teste
 		when(mockUsuarioDao.buscarPorEmail(USUARIO_CADASTRADO.getEmail())).thenReturn(USUARIO_CADASTRADO);
+		@SuppressWarnings("rawtypes")
+		ArgumentCaptor<Collection> argumentCaptor = ArgumentCaptor.forClass(Collection.class);
+		//Capturamos os votos salvos para verificação
+		when(mockVotoDao.salvarVotos(argumentCaptor.capture())).thenReturn(Collections.<Voto>emptySet());
 		
 		//Executamos o método a ser testado
 		boolean respostaObtida = this.service.registrarVotos(USUARIO_CADASTRADO, VOTOS_NAO_REGISTRADOS);
 		
 		assertTrue(respostaObtida);
 		verify(mockUsuarioDao, never()).salvar(USUARIO_CADASTRADO);
-		verify(mockVotoDao).salvarVotos(votosRegistrados);
+		
+		//Asseguramos que todos os votos foram registrados com o usuário
+		for(Object voto : argumentCaptor.getValue()){
+			assertEquals(USUARIO_CADASTRADO, ((Voto)voto).getUsuario());
+		}		
 	}
 	
 	@Test

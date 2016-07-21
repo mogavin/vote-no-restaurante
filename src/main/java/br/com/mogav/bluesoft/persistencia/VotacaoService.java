@@ -45,8 +45,7 @@ public class VotacaoService {
 		Usuario encontrado = this.usuarioDao.buscarPorEmail(usuario.getEmail());
 		encontrado = (encontrado == null) ? this.usuarioDao.salvar(usuario) : encontrado;
 		
-		Collection<Voto> votosRegistrados = Sets.newHashSet();
-		
+		Collection<Voto> votosRegistrados = Sets.newHashSet();		
 		for(Voto voto : votos)
 			votosRegistrados.add(new Voto(encontrado, voto.isPositivo(), voto.getRestaurante()));			
 
