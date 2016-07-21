@@ -1,12 +1,17 @@
 package br.com.mogav.bluesoft.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="usuario")
 public class Usuario extends Persistivel{
 
+	@Column(nullable = false)
 	private final String nome;
+	@Column(unique=true, nullable = false)
 	private final String email;
-	
 
 	/**
 	 * Construtor padrão.
@@ -18,7 +23,7 @@ public class Usuario extends Persistivel{
 	/**
 	 * Construtor para persistência.
 	 */
-	public Usuario(Long id, String nome, String email) {
+	Usuario(Long id, String nome, String email) {
 		super(id);
 		this.nome = nome;
 		this.email = email;
@@ -33,16 +38,13 @@ public class Usuario extends Persistivel{
 		return this.email;
 	}
 
-
 	@Override
 	public final int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public final boolean equals(Object obj) {
@@ -58,11 +60,6 @@ public class Usuario extends Persistivel{
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
 		return true;
-	}
+	}	
 }

@@ -1,8 +1,18 @@
 package br.com.mogav.bluesoft.model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="voto")
 public class Voto extends Persistivel{
 	
+	@OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private final Usuario usuario;
+	
 	private final boolean isPositivo;
 	private final Restaurante restaurante;
 	

@@ -7,4 +7,5 @@ import br.com.mogav.bluesoft.model.Persistivel;
 interface Dao<T extends Persistivel> {
 	T salvar(T t);
 	Collection<T> listarTodos();
+	boolean apagarTodos();
 }

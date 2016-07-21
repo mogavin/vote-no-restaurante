@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+  <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<!-- Valores substituídos de acordo com o profile do POM (producao ou default)-->	
+			<property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user}"/>
+			<property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password}"/>
+			<property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver}"/>
+			<property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url}"/>
+			<property name="hibernate.cache.provider_class" value="${hibernate.cache.provider_class}"/>
+			<property name="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}"/>
+			<property name="hibernate.dialect" value="${hibernate.dialect}"/>
+			<property name="hibernate.show_sql" value="${hibernate.show_sql}"/>
+			<property name="hibernate.format_sql" value="${hibernate.format_sql}"/>
+			<property name="hibernate.physical_naming_strategy" value="br.com.mogav.newsletter.util.CustomNamingStrategy"/>
+			<!-- Scan for annotated classes and Hibernate mapping XML files -->
+			<property name="hibernate.archive.autodetection" value="class, hbm"/>   		  
+			<!-- C3P0 -->
+			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+			<property name="hibernate.c3p0.acquire_increment" value="1"/>
+			<property name="hibernate.c3p0.idle_test_period" value="300"/>
+			<property name="hibernate.c3p0.timeout" value="120"/>
+			<property name="hibernate.c3p0.max_size" value="25"/>
+			<property name="hibernate.c3p0.min_size" value="1"/>
+			<property name="hibernate.c3p0.max_statement" value="0"/>
+			<property name="hibernate.c3p0.preferredTestQuery" value="1"/>
+	    </properties>
+  </persistence-unit>
+</persistence>

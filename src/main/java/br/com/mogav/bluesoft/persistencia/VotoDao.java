@@ -1,12 +1,12 @@
 package br.com.mogav.bluesoft.persistencia;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import br.com.mogav.bluesoft.model.Restaurante;
@@ -14,19 +14,13 @@ import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 
 @RequestScoped
-public class VotoDao implements Dao<Voto>{
+public class VotoDao extends JPADao<Voto>{
 
-	private static Long CHAVE_DISPONIVEL = 1L;
-	private static final Map<Long, Voto> TABELA = Maps.newHashMap();
-										
-	
-	public Voto salvar(Voto voto) {
-		Voto aSalvar = new Voto(CHAVE_DISPONIVEL, voto.getUsuario(), voto.isPositivo(), voto.getRestaurante());
-		TABELA.put(CHAVE_DISPONIVEL, aSalvar);
-		CHAVE_DISPONIVEL++;
-		
-		return aSalvar;
+	@Inject
+	public VotoDao(EntityManager em){
+		super(em, Voto.class);
 	}
+	
 	
 	public Collection<Voto> salvarVotos(Collection<Voto> votos) {		
 		Collection<Voto> salvos = Sets.newHashSet();		
@@ -36,10 +30,6 @@ public class VotoDao implements Dao<Voto>{
 		}
 		
 		return salvos;
-	}
-
-	public Collection<Voto> listarTodos() {
-		return Collections.unmodifiableCollection(TABELA.values());
 	}
 		
 	Map<Restaurante, Map<Integer, Integer>> listarRankingGeral() {

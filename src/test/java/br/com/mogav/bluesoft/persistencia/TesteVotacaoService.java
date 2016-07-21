@@ -21,7 +21,7 @@ import br.com.mogav.bluesoft.model.Voto;
 
 public class TesteVotacaoService {
 
-	private static final Usuario USUARIO_CADASTRADO = new Usuario(1L, "Joao", "joao@email.com");
+	private static final Usuario USUARIO_CADASTRADO = new Usuario("Joao", "joao@email.com");
 	
 	private static final List<Voto> VOTOS_NAO_REGISTRADOS = ImmutableList.of(
 			new Voto(null, true, Restaurante.OUTBACK),
