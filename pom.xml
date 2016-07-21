@@ -32,7 +32,7 @@
 	      <javax.persistence.jdbc.user>root</javax.persistence.jdbc.user>
 	      <javax.persistence.jdbc.password>root</javax.persistence.jdbc.password>
 	      <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
-	      <javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/newsletter</javax.persistence.jdbc.url>
+	      <javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/bluesoft</javax.persistence.jdbc.url>
 	      <hibernate.cache.provider_class>org.hibernate.cache.NoCacheProvider</hibernate.cache.provider_class>
 	      <hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto>
 	      <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
@@ -46,7 +46,7 @@
 	      <javax.persistence.jdbc.user>bluesoft_andre</javax.persistence.jdbc.user>
 	      <javax.persistence.jdbc.password>softblue</javax.persistence.jdbc.password>
 	      <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
-	      <javax.persistence.jdbc.url>jdbc:mysql://162.144.115.91:3306/bluesoft_base</javax.persistence.jdbc.url>
+	      <javax.persistence.jdbc.url>jdbc:mysql://162.144.115.91:3306/bluesoft</javax.persistence.jdbc.url>
 	      <hibernate.cache.provider_class>org.hibernate.cache.NoCacheProvider</hibernate.cache.provider_class>
 	      <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
 	      <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
