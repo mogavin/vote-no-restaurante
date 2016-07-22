@@ -11,40 +11,45 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 
 import br.com.mogav.bluesoft.model.Usuario;
-import br.com.mogav.bluesoft.persistencia.UsuarioDao;
 
-public class TesteUsuarioDao {
+public class TesteUsuarioDao extends BaseTesteDAO<Usuario>{
 
-	private static final List<Usuario> USUARIOS = ImmutableList.of(
-			new Usuario("Joao", "joao@email.com"),
-			new Usuario("Pedro", "pedro@email.com")
-	);
+	private List<Usuario> usuarios;
 	
 	private UsuarioDao dao;
 	
 	@Before
 	public void setup(){
-		this.dao = new UsuarioDao();
+		this.usuarios = ImmutableList.of(
+			new Usuario("Joao", "joao@email.com"),
+			new Usuario("Pedro", "pedro@email.com")
+		);
+		this.dao = new UsuarioDao(this.entityManager);
+	}
+	
+	@Override
+	protected JPADao<Usuario> obterDAO() {
+		return this.dao;
 	}
 	
 	
 	@Test
 	public void salvarNovoUsuario(){		
-		Usuario salvo = dao.salvar(USUARIOS.get(0));
+		Usuario salvo = dao.salvar(usuarios.get(0));
 		assertNotNull(salvo.getId());
 	}
 	
 	@Test
 	public void listarTodos(){
-		dao.salvar(USUARIOS.get(0));
-		dao.salvar(USUARIOS.get(1));
+		dao.salvar(usuarios.get(0));
+		dao.salvar(usuarios.get(1));
 		
-		CollectionUtils.isEqualCollection(USUARIOS, dao.listarTodos());
+		CollectionUtils.isEqualCollection(usuarios, dao.listarTodos());
 	}
 	
 	@Test
 	public void buscarPorEmail(){		
-		Usuario aSalvar = USUARIOS.get(0);	
+		Usuario aSalvar = usuarios.get(0);	
 		dao.salvar(aSalvar);
 
 		assertEquals(aSalvar, dao.buscarPorEmail(aSalvar.getEmail()));

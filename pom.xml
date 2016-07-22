@@ -7,7 +7,54 @@
   
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  
+  <!-- Valores default para persistence.xml - Banco de dados em memória --> 
+		<javax.persistence.jdbc.user>sa</javax.persistence.jdbc.user>
+		<javax.persistence.jdbc.password></javax.persistence.jdbc.password>
+		<javax.persistence.jdbc.driver>org.hsqldb.jdbcDriver</javax.persistence.jdbc.driver>
+		<javax.persistence.jdbc.url>jdbc:hsqldb:mem:.</javax.persistence.jdbc.url>
+		<hibernate.cache.provider_class>org.hibernate.cache.NoCacheProvider</hibernate.cache.provider_class>
+		<hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto>
+		<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
+		<hibernate.show_sql>true</hibernate.show_sql>
+		<hibernate.format_sql>true</hibernate.format_sql>			    
   </properties>
+	
+	
+	<!-- Valores de producao para persistence.xml - Banco de dados real -->
+	<!-- Para ativar, buildar com o maven com o comando  mvn -(ambiente) -->
+	<!-- ex: mvn -local -->
+	<!-- http://stackoverflow.com/questions/7353585/maven-include-resource-file-based-on-profile -->
+	<profiles>
+	  <profile>
+	    <id>local</id>
+	    <properties>
+	      <javax.persistence.jdbc.user>root</javax.persistence.jdbc.user>
+	      <javax.persistence.jdbc.password>root</javax.persistence.jdbc.password>
+	      <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
+	      <javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/bluesoft</javax.persistence.jdbc.url>
+	      <hibernate.cache.provider_class>org.hibernate.cache.NoCacheProvider</hibernate.cache.provider_class>
+	      <hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto>
+	      <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
+	      <hibernate.show_sql>false</hibernate.show_sql>
+	      <hibernate.format_sql>false</hibernate.format_sql>
+	    </properties>
+	  </profile>
+	  <profile>
+	    <id>bluesoft</id>
+	    <properties>
+	      <javax.persistence.jdbc.user>bluesoft_andre</javax.persistence.jdbc.user>
+	      <javax.persistence.jdbc.password>softblue</javax.persistence.jdbc.password>
+	      <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
+	      <javax.persistence.jdbc.url>jdbc:mysql://162.144.115.91:3306/bluesoft</javax.persistence.jdbc.url>
+	      <hibernate.cache.provider_class>org.hibernate.cache.NoCacheProvider</hibernate.cache.provider_class>
+	      <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+	      <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
+	      <hibernate.show_sql>false</hibernate.show_sql>
+	      <hibernate.format_sql>false</hibernate.format_sql>
+	    </properties>
+	  </profile>
+	</profiles>
 
 	<dependencies>
 		<dependency>
@@ -75,7 +122,51 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-		</dependency>	
+		</dependency>
+		
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>		
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>5.0.6.Final</version>
+		</dependency>
+		
+		<!-- Injeta EntityManager e EntityManagerFactory, além de implementar Open EntityManager in View -->
+		<dependency>
+		    <groupId>br.com.caelum.vraptor</groupId>
+		    <artifactId>vraptor-jpa</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.0.0.Final</version>
+		</dependency>
+		
+		<!-- Evita erro "NoClassDefFoundError: org/w3c/dom/ElementTraversal" devido ao persistence.xml -->
+		<dependency>
+		    <groupId>xml-apis</groupId>
+		    <artifactId>xml-apis</artifactId>
+		    <version>1.4.01</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.36</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.3</version>
+		</dependency>
 		
 		<!--
 		Evita o aviso de erro na IDE:
@@ -125,5 +216,15 @@
 		        </configuration>
 		    </plugin>
 		</plugins>
+		
+		<!-- Recursos default - Por padrão move para webapp/WEB-INF/classes -->		
+		<resources>
+		  <!-- Substitui as variáveis do persistence.xml pelos valores determinados no início deste POM -->	
+		  <resource>
+		    <directory>src/main/resources</directory>
+		    <filtering>true</filtering>
+		  </resource>		  
+		</resources>
+		
 	</build> 
 </project>

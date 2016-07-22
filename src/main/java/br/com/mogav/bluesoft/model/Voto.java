@@ -1,8 +1,18 @@
 package br.com.mogav.bluesoft.model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="voto")
 public class Voto extends Persistivel{
 	
+	@OneToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private final Usuario usuario;
+	
 	private final boolean isPositivo;
 	private final Restaurante restaurante;
 	
@@ -34,37 +44,5 @@ public class Voto extends Persistivel{
 
 	public Restaurante getRestaurante() {
 		return this.restaurante;
-	}
-
-	
-	@Override
-	public final int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (isPositivo ? 1231 : 1237);
-		result = prime * result + ((restaurante == null) ? 0 : restaurante.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		return result;
-	}
-
-	@Override
-	public final boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Voto))
-			return false;
-		Voto other = (Voto) obj;
-		if (isPositivo != other.isPositivo)
-			return false;
-		if (restaurante != other.restaurante)
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
-		return true;
-	}
+	}	
 }

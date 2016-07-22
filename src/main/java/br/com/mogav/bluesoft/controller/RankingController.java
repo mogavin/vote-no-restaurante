@@ -1,11 +1,10 @@
 package br.com.mogav.bluesoft.controller;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Collection;
-import java.util.Collections;
 
 import javax.inject.Inject;
+
+import com.google.common.collect.ImmutableList;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
@@ -14,8 +13,6 @@ import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.persistencia.VotacaoService;
-
-import com.google.common.collect.ImmutableList;
 
 @Controller
 @Path("/ranking")
@@ -39,10 +36,10 @@ public class RankingController {
 
 	@Path({"", "/"})
 	public void index(Usuario usuario) {
-		
 		//Disponibiliza os rankings para a view
-		Collection<ItemRankingVotos> rankingUsuario = obterMockItensRanking();//this.service.listarRankingUsuario(usuario);
-		Collection<ItemRankingVotos> rankingGeral = obterMockItensRanking();//this.service.listarRankingGeral();
+		Collection<ItemRankingVotos> rankingUsuario = this.service.listarRankingUsuario(usuario);//obterMockItensRanking()
+		Collection<ItemRankingVotos> rankingGeral = this.service.listarRankingGeral();//obterMockItensRanking()
+
 		this.result.include("rankingUsuario", rankingUsuario);
 		this.result.include("rankingGeral", rankingGeral);
 	}

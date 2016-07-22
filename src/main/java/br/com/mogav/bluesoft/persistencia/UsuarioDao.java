@@ -1,42 +1,45 @@
 package br.com.mogav.bluesoft.persistencia;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-
 import javax.enterprise.context.RequestScoped;
-
-import com.google.common.collect.Maps;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import br.com.mogav.bluesoft.model.Usuario;
 
 @RequestScoped
-public class UsuarioDao implements Dao<Usuario>{
-
-	private static Long CHAVE_DISPONIVEL = 1L;
-	private static final Map<Long, Usuario> TABELA = Maps.newHashMap();
-										
+public class UsuarioDao extends JPADao<Usuario>{							
 	
-	public Usuario salvar(Usuario usuario) {
-		Usuario aSalvar = new Usuario(CHAVE_DISPONIVEL, usuario.getNome(), usuario.getEmail());
-		TABELA.put(CHAVE_DISPONIVEL, aSalvar);
-		CHAVE_DISPONIVEL++;
-		
-		return aSalvar;
+	/**
+     * @deprecated CDI eyes only
+     */
+	UsuarioDao(){
+    	this(null);
+    }
+	
+	@Inject
+	public UsuarioDao(EntityManager em){
+		super(em, Usuario.class);
 	}
-
-	public Collection<Usuario> listarTodos() {
-		return Collections.unmodifiableCollection(TABELA.values());
-	}
-
+	
+	
 	public Usuario buscarPorEmail(String email) {		
-		Usuario encontrado = null;		
-		for(Usuario usuario : TABELA.values()){
-			if(usuario.getEmail().equals(email)){
-				encontrado = usuario; break;
-			}
-		}
+		CriteriaBuilder cb = this.em.getCriteriaBuilder();
 		
-		return encontrado;
+		try{
+			CriteriaQuery<Usuario> q = cb.createQuery(Usuario.class);
+			Root<Usuario> from = q.from(Usuario.class);
+			TypedQuery<Usuario> typedQuery = this.em.createQuery(
+				    q.select(from)
+				    	.where(cb.equal(from.get("email"), email))
+			);			
+			return typedQuery.getSingleResult();
+		}catch(RuntimeException e){
+			this.log.error(e);
+			return null;
+		}
 	}
 }
