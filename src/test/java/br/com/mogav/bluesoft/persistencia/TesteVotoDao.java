@@ -220,4 +220,38 @@ public class TesteVotoDao{
 		
 		assertEquals(respostaEsperada, respostaObtida);
 	}
+	
+	@Test
+	public void listarRankingGeral_2(){
+		
+		List<Restaurante> respostaEsperada = ImmutableList.<Restaurante>of(
+				Restaurante.OUTBACK,
+				Restaurante.MCDONALDS,
+				Restaurante.SUBWAY,
+				Restaurante.GIRAFFAS,
+				Restaurante.WENDYS
+		);		
+		
+		votoDao.salvarVotos(votosGeral);
+		
+		List<Restaurante> respostaObtida = votoDao.obterRanking_2(null);
+		assertEquals(respostaEsperada, respostaObtida);
+	}
+	
+	@Test
+	public void listarRankingUsuario_2(){
+		
+		List<Restaurante> respostaEsperada = ImmutableList.<Restaurante>of(
+				Restaurante.OUTBACK,
+				Restaurante.SUBWAY,
+				Restaurante.GIRAFFAS,
+				Restaurante.MCDONALDS,
+				Restaurante.WENDYS
+		);		
+		
+		votoDao.salvarVotos(votosGeral);
+		
+		List<Restaurante> respostaObtida = votoDao.obterRanking_2(usuario_1);
+		assertEquals(respostaEsperada, respostaObtida);
+	}
 }
