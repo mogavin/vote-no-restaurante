@@ -1,5 +1,6 @@
 package br.com.mogav.bluesoft.controller;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -48,6 +49,13 @@ public class TesteVotacaoController {
 		doReturn(mockRankingController).when(spyResult).redirectTo(RankingController.class);
 	}
 	
+	
+	@Test
+	public void enviarRestaurantesDisponiveisParaView(){		
+		//Executamos o método a ser testado
+		controller.index();		
+		assertArrayEquals(Restaurante.values(), (Object[])spyResult.included().get("restaurantes"));
+	}
 	
 	@Test
 	public void votar(){
