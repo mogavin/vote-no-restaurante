@@ -10,6 +10,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.model.Voto;
 import br.com.mogav.bluesoft.persistencia.VotacaoService;
@@ -36,7 +37,10 @@ public class VotacaoController {
     }
     
     @Path({"", "/"})
-    public void index(){}
+    public void index(){
+		//Disponibiliza os restaurantes para a view
+		this.result.include("restaurantes", Restaurante.values());    	
+    }
 
     @Post
 	public void votar(Usuario usuario, Collection<Voto> votos) {    	
