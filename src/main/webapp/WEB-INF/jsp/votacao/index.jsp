@@ -48,7 +48,7 @@
 	  <!-- Wrapper for slides -->
 		<div class="carousel-inner">
 		  <!-- Slide -->
-		  <div class="item active">
+		  <div class="item active container-fluid">
 	       <div class="row">
 	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="${restaurantes[0]}" data-inverse="${restaurantes[1]}">
 	              	<img src="<votacaotaglib:cssImgRest restaurante='${restaurantes[0]}'/>"/>
@@ -61,7 +61,7 @@
 		  </div>
 			<!-- Slide -->
 			<div class="item">
-			    <div class="row">
+			    <div class="row container-fluid">
 			        <div class="col-sm-12 col-xs-12 nopadding img-container">
    		              	<img src="<votacaotaglib:cssImgRest restaurante='${restaurantes[2]}'/>"/>
 			            <div class="carousel-caption">
@@ -73,8 +73,8 @@
 			</div>
 			<!-- Slide form -->
 			<div class="item">
-			    <div class="row">
-			        <div class="col-sm-offset-2 col-sm-8 col-xs-10 nopadding img-container">
+			    <div class="row container-fluid">
+			        <div class="col-sm-offset-2 col-sm-8 col-xs-12 nopadding img-container">
 			            <form id="form-usuario" class="form-horizontal">
 						  <div class="form-group">
 						    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
@@ -95,7 +95,6 @@
 						  </div>
 						</form>
 			        </div>
-			    	<div class="col-sm-2 col-xs-1 nopadding img-container"></div>
 			    </div>
 			</div>
 		</div>
