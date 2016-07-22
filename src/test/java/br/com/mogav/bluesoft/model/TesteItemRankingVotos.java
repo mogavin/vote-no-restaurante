@@ -1,17 +1,16 @@
 package br.com.mogav.bluesoft.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-
 public class TesteItemRankingVotos {
 
 	private final Restaurante RESTAURANTE = Restaurante.GIRAFFAS;
-	private static final int QTD_VOTOS_POSITIVOS = 5;
-	private static final int QTD_VOTOS_NEGATIVOS = 2;
+	private static final Integer QTD_VOTOS_POSITIVOS = 5;
+	private static final Integer QTD_VOTOS_NEGATIVOS = 2;
 	
 	private ItemRankingVotos item;
 	
@@ -34,6 +33,12 @@ public class TesteItemRankingVotos {
 	@Test
 	public void obterQuantidadeDeVotosNegativos(){
 		assertEquals(QTD_VOTOS_NEGATIVOS, item.getQtdVotosNegativos());
+	}
+	
+	@Test
+	public void obterPosicao(){
+		Integer posicao = QTD_VOTOS_POSITIVOS - QTD_VOTOS_NEGATIVOS;
+		assertEquals(posicao, item.getPosicao());
 	}
 	
 	@Test

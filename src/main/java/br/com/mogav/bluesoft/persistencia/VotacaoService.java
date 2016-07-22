@@ -1,6 +1,7 @@
 package br.com.mogav.bluesoft.persistencia;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -55,14 +56,14 @@ public class VotacaoService {
 	}
 	
 	public List<ItemRankingVotos> listarRankingGeral() {		
-		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.listarRankingGeral();
+		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.obterDadosRankingGeral();
 		List<ItemRankingVotos> rankingGeral = VotacaoService.obterItemsRanking(respostaDao);
 		
 		return rankingGeral;
 	}
 	
 	public List<ItemRankingVotos> listarRankingUsuario(Usuario usuario) {		
-		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.listarRankingUsuario(usuario);
+		Map<Restaurante, Map<Integer, Integer>> respostaDao = this.votoDao.obterDadosRankingUsuario(usuario);
 		List<ItemRankingVotos> rankingUsuario = VotacaoService.obterItemsRanking(respostaDao);
 		
 		return rankingUsuario;
@@ -87,6 +88,8 @@ public class VotacaoService {
 
 			rankingGeral.add(new ItemRankingVotos(restaurante, qtdVotosPositivos, qtdVotosNegativos));
 		}
+		//Realiza a ordenação dos itens do ranking
+		Collections.sort(rankingGeral);
 		
 		return rankingGeral;
 	}
