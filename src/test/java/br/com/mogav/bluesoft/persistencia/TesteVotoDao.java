@@ -1,6 +1,8 @@
 package br.com.mogav.bluesoft.persistencia;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,14 +18,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.mogav.bluesoft.model.Restaurante;
+import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.model.Voto;
+import br.com.mogav.bluesoft.persistencia.UsuarioDao;
+import br.com.mogav.bluesoft.persistencia.VotoDao;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-
-import br.com.mogav.bluesoft.model.Restaurante;
-import br.com.mogav.bluesoft.model.Usuario;
-import br.com.mogav.bluesoft.model.Voto;
 
 //Não herda de BaseTesteDAO, pois precisa controlar mais de um DAO para efetuar os testes
 public class TesteVotoDao{
@@ -34,28 +38,8 @@ public class TesteVotoDao{
 	private Usuario usuario_1;
 	private Usuario usuario_2;
 	
-	//Ranking usuario 1: 
-	//1o - OUTBACK(2 positivos, 0 negativos)
-	//2o - SUBWAY(1 positivos, 0 negativos)
-	//3o - GIRAFFAS(2 positivos, 1 negativos)
-	//4o - MCDONALDS(1 positivos, 1 negativos)
-	//5o - WENDYS(0 positivos, 1 negativos)
 	private List<Voto> votosUsuario_1;
-
-	//Ranking usuario 2: 
-	//1o - MCDONALDS(2 positivos, 0 negativos)
-	//2o - OUTBACK(1 positivos, 0 negativos)
-	//3o - WENDYS(2 positivos, 1 negativos)
-	//4o - SUBWAY(1 positivos, 1 negativos)
-	//5o - GIRAFFAS(0 positivos, 1 negativos)
 	private Collection<Voto> votosUsuario_2;
-	
-	//Ranking geral: 
-	//1o - OUTBACK(3 positivos, 0 negativos)
-	//2o - MCDONALDS(3 positivos, 1 negativos)
-	//3o - SUBWAY(2 positivos, 1 negativos)
-	//4o - WENDYS(2 positivos, 2 negativos)
-	//5o - GIRAFFAS(2 positivos, 2 negativos)
 	private Collection<Voto> votosGeral;
 	
 	private UsuarioDao usuarioDao;
@@ -87,12 +71,6 @@ public class TesteVotoDao{
 		this.entityTransaction.commit();
 		
 		
-		//Ranking usuario 1: 
-		//1o - OUTBACK(2 positivos, 0 negativos)
-		//2o - SUBWAY(1 positivos, 0 negativos)
-		//3o - GIRAFFAS(2 positivos, 1 negativos)
-		//4o - MCDONALDS(1 positivos, 1 negativos)
-		//5o - WENDYS(0 positivos, 1 negativos)
 		this.votosUsuario_1 = ImmutableList.of(
 				new Voto(usuario_1, true, Restaurante.OUTBACK),
 				new Voto(usuario_1, true, Restaurante.OUTBACK),
@@ -105,12 +83,6 @@ public class TesteVotoDao{
 				new Voto(usuario_1, true, Restaurante.GIRAFFAS)
 		);	
 
-		//Ranking usuario 2: 
-		//1o - MCDONALDS(2 positivos, 0 negativos)
-		//2o - OUTBACK(1 positivos, 0 negativos)
-		//3o - WENDYS(2 positivos, 1 negativos)
-		//4o - SUBWAY(1 positivos, 1 negativos)
-		//5o - GIRAFFAS(0 positivos, 1 negativos)
 		this.votosUsuario_2 = ImmutableSet.of(
 				new Voto(usuario_2, true, Restaurante.OUTBACK),
 				new Voto(usuario_2, true, Restaurante.WENDYS),
@@ -123,12 +95,6 @@ public class TesteVotoDao{
 				new Voto(usuario_2, false, Restaurante.GIRAFFAS)
 		);
 		
-		//Ranking geral: 
-		//1o - OUTBACK(3 positivos, 0 negativos)
-		//2o - MCDONALDS(3 positivos, 1 negativos)
-		//3o - SUBWAY(2 positivos, 1 negativos)
-		//4o - WENDYS(2 positivos, 2 negativos)
-		//5o - GIRAFFAS(2 positivos, 2 negativos)
 		this.votosGeral = ImmutableSet.<Voto>builder().addAll(votosUsuario_1).addAll(votosUsuario_2).build();
 		
 		//Delimitamos uma nova transação antes de cada teste
@@ -174,14 +140,8 @@ public class TesteVotoDao{
 		CollectionUtils.isEqualCollection(votosGeral, votoDao.listarTodos());
 	}
 	
-	//Ranking geral: 
-	//1o - OUTBACK(3 positivos, 0 negativos)
-	//2o - MCDONALDS(3 positivos, 1 negativos)
-	//3o - SUBWAY(2 positivos, 1 negativos)
-	//4o - WENDYS(2 positivos, 2 negativos)
-	//5o - GIRAFFAS(2 positivos, 2 negativos)
 	@Test
-	public void listarRankingGeral(){
+	public void listarDadosRankingGeral(){
 		
 		Map<Restaurante, Map<Integer, Integer>> respostaEsperada = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
 				Restaurante.OUTBACK, ImmutableMap.of(3, 0),
@@ -193,19 +153,13 @@ public class TesteVotoDao{
 		
 		votoDao.salvarVotos(votosGeral);
 		
-		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.listarRankingGeral();
+		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.obterDadosRankingGeral();
 		
 		assertEquals(respostaEsperada, respostaObtida);
 	}
 	
-	//Ranking usuario 1: 
-	//1o - OUTBACK(2 positivos, 0 negativos)
-	//2o - SUBWAY(1 positivos, 0 negativos)
-	//3o - GIRAFFAS(2 positivos, 1 negativos)
-	//4o - MCDONALDS(1 positivos, 1 negativos)
-	//5o - WENDYS(0 positivos, 1 negativos)
 	@Test
-	public void listarRankingUsuario(){
+	public void listarDadosRankingUsuario(){
 		Map<Restaurante, Map<Integer, Integer>> respostaEsperada = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
 				Restaurante.OUTBACK, ImmutableMap.of(2, 0),
 				Restaurante.SUBWAY, ImmutableMap.of(1, 0),
@@ -216,42 +170,8 @@ public class TesteVotoDao{
 		
 		votoDao.salvarVotos(votosGeral);
 		
-		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.listarRankingUsuario(usuario_1);
+		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.obterDadosRankingUsuario(usuario_1);
 		
 		assertEquals(respostaEsperada, respostaObtida);
-	}
-	
-	@Test
-	public void listarRankingGeral_2(){
-		
-		List<Restaurante> respostaEsperada = ImmutableList.<Restaurante>of(
-				Restaurante.OUTBACK,
-				Restaurante.MCDONALDS,
-				Restaurante.SUBWAY,
-				Restaurante.GIRAFFAS,
-				Restaurante.WENDYS
-		);		
-		
-		votoDao.salvarVotos(votosGeral);
-		
-		List<Restaurante> respostaObtida = votoDao.obterRanking_2(null);
-		assertEquals(respostaEsperada, respostaObtida);
-	}
-	
-	@Test
-	public void listarRankingUsuario_2(){
-		
-		List<Restaurante> respostaEsperada = ImmutableList.<Restaurante>of(
-				Restaurante.OUTBACK,
-				Restaurante.SUBWAY,
-				Restaurante.GIRAFFAS,
-				Restaurante.MCDONALDS,
-				Restaurante.WENDYS
-		);		
-		
-		votoDao.salvarVotos(votosGeral);
-		
-		List<Restaurante> respostaObtida = votoDao.obterRanking_2(usuario_1);
-		assertEquals(respostaEsperada, respostaObtida);
-	}
+	}	
 }

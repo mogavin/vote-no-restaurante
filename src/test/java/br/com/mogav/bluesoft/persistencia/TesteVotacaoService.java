@@ -84,18 +84,24 @@ public class TesteVotacaoService {
 	@Test
 	public void listarRankingGeral(){
 		
-		//Deve manter a ordem dos valores retornados de 'respostaDao'
+		//Ordenação esperada
 		List<ItemRankingVotos> respostaEsperada = ImmutableList.of(
-			new ItemRankingVotos(Restaurante.OUTBACK, 3, 5),
-			new ItemRankingVotos(Restaurante.MCDONALDS, 8, 1)
+			new ItemRankingVotos(Restaurante.OUTBACK, 3, 0),
+			new ItemRankingVotos(Restaurante.MCDONALDS, 3, 1),
+			new ItemRankingVotos(Restaurante.SUBWAY, 2, 1),
+			new ItemRankingVotos(Restaurante.WENDYS, 2, 2),
+			new ItemRankingVotos(Restaurante.GIRAFFAS, 2, 2)
 		);
 		
-		
+		//Resultado do DAO desordenado		
 		Map<Restaurante, Map<Integer, Integer>> respostaDao = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
-			Restaurante.OUTBACK, ImmutableMap.of(3, 5),
-			Restaurante.MCDONALDS, ImmutableMap.of(8, 1)
+			Restaurante.OUTBACK, ImmutableMap.of(3, 0),
+			Restaurante.WENDYS, ImmutableMap.of(2, 2),
+			Restaurante.SUBWAY, ImmutableMap.of(2, 1),
+			Restaurante.MCDONALDS, ImmutableMap.of(3, 1),
+			Restaurante.GIRAFFAS, ImmutableMap.of(2, 2)
 		);		
-		when(mockVotoDao.listarRankingGeral()).thenReturn(respostaDao);
+		when(mockVotoDao.obterDadosRankingGeral()).thenReturn(respostaDao);
 		
 		//Executamos o método a ser testado
 		List<ItemRankingVotos> respostaObtida = service.listarRankingGeral();
@@ -107,19 +113,25 @@ public class TesteVotacaoService {
 	@Test
 	public void listarRankingUsuario(){
 		
-		//Deve manter a ordem dos valores retornados de 'respostaDao'
+		//Ordenação esperada
 		List<ItemRankingVotos> respostaEsperada = ImmutableList.of(
-			new ItemRankingVotos(Restaurante.OUTBACK, 3, 5),
-			new ItemRankingVotos(Restaurante.MCDONALDS, 8, 1)
-		);
+			new ItemRankingVotos(Restaurante.OUTBACK, 2, 0),
+			new ItemRankingVotos(Restaurante.GIRAFFAS, 2, 1),
+			new ItemRankingVotos(Restaurante.SUBWAY, 1, 0),
+			new ItemRankingVotos(Restaurante.MCDONALDS, 1, 1),
+			new ItemRankingVotos(Restaurante.WENDYS, 0, 1)
+		);		
 		
-		
+		//Resultado do DAO desordenado
 		Map<Restaurante, Map<Integer, Integer>> respostaDao = ImmutableMap.<Restaurante, Map<Integer, Integer>>of(
-			Restaurante.OUTBACK, ImmutableMap.of(3, 5),
-			Restaurante.MCDONALDS, ImmutableMap.of(8, 1)
+			Restaurante.GIRAFFAS, ImmutableMap.of(2, 1),
+			Restaurante.OUTBACK, ImmutableMap.of(2, 0),
+			Restaurante.MCDONALDS, ImmutableMap.of(1, 1),
+			Restaurante.WENDYS, ImmutableMap.of(0, 1),
+			Restaurante.SUBWAY, ImmutableMap.of(1, 0)
 		);
 		when(mockUsuarioDao.buscarPorEmail(USUARIO_CADASTRADO.getEmail())).thenReturn(USUARIO_CADASTRADO);
-		when(mockVotoDao.listarRankingUsuario(USUARIO_CADASTRADO)).thenReturn(respostaDao);
+		when(mockVotoDao.obterDadosRankingUsuario(USUARIO_CADASTRADO)).thenReturn(respostaDao);
 		
 		//Executamos o método a ser testado
 		List<ItemRankingVotos> respostaObtida = service.listarRankingUsuario(USUARIO_CADASTRADO);
