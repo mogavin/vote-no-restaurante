@@ -37,8 +37,8 @@ public class RankingController {
 	@Path({"", "/"})
 	public void index(Usuario usuario) {
 		//Disponibiliza os rankings para a view
-		Collection<ItemRankingVotos> rankingUsuario = obterMockItensRanking();//this.service.listarRankingUsuario(usuario);
-		Collection<ItemRankingVotos> rankingGeral = obterMockItensRanking();//this.service.listarRankingGeral();
+		Collection<ItemRankingVotos> rankingUsuario = this.service.listarRankingUsuario(usuario);//obterMockItensRanking()
+		Collection<ItemRankingVotos> rankingGeral = this.service.listarRankingGeral();//obterMockItensRanking()
 
 		this.result.include("rankingUsuario", rankingUsuario);
 		this.result.include("rankingGeral", rankingGeral);
