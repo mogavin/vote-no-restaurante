@@ -1,6 +1,6 @@
 package br.com.mogav.bluesoft.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -10,14 +10,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Lists;
-
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.mogav.bluesoft.model.ItemRankingVotos;
 import br.com.mogav.bluesoft.model.Restaurante;
 import br.com.mogav.bluesoft.model.Usuario;
 import br.com.mogav.bluesoft.persistencia.VotacaoService;
+
+import com.google.common.collect.Lists;
 
 public class TesteRankingController {
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags/votacao" prefix="votacaotaglib"%>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -46,14 +47,14 @@
     <div id="carousel-example-generic" class="carousel slide">
 	  <!-- Wrapper for slides -->
 		<div class="carousel-inner">
-		     <!-- Slide -->
+		  <!-- Slide -->
 		  <div class="item active">
 	       <div class="row">
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="MCDONALDS" data-inverse="SUBWAY">
-	              	<img src="http://placehold.it/1280x720" alt=""/>
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="${restaurantes[0]}" data-inverse="${restaurantes[1]}">
+	              	<img src="<votacaotaglib:cssImgRest restaurante='${restaurantes[0]}'/>"/>
 	           </div>
-	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="SUBWAY" data-inverse="MCDONALDS">
-	               <img src="http://placehold.it/1280x720" alt=""/>
+	           <div class="col-sm-6 col-md-6 col-xs-6 nopadding img-container voto voto-positivo" data-restaurante="${restaurantes[1]}" data-inverse="${restaurantes[0]}">
+	              	<img src="<votacaotaglib:cssImgRest restaurante='${restaurantes[1]}'/>"/>
 	           </div>
 	           <div class="carousel-caption">Qual dos dois você mais gosta ?</div>
 	       </div>
@@ -62,7 +63,7 @@
 			<div class="item">
 			    <div class="row">
 			        <div class="col-sm-12 col-xs-12 nopadding img-container">
-			            <img src="http://placehold.it/1280x720" alt=""/>
+   		              	<img src="<votacaotaglib:cssImgRest restaurante='${restaurantes[2]}'/>"/>
 			            <div class="carousel-caption">
 			            	<button type="button" class="btn btn-primary voto voto-positivo" data-restaurante="WENDYS">Primary</button>
 			            	<button type="button" class="btn btn-danger voto voto-negativo" data-restaurante="WENDYS">Danger</button>
@@ -73,27 +74,28 @@
 			<!-- Slide form -->
 			<div class="item">
 			    <div class="row">
-			        <div class="col-sm-12 col-xs-12 nopadding img-container">
+			        <div class="col-sm-offset-2 col-sm-8 col-xs-10 nopadding img-container">
 			            <form id="form-usuario" class="form-horizontal">
 						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+						    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 						    <div class="col-sm-8">
-						      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+						    </div>
+						  </div>
+  						  <div class="form-group">
+						    <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="inputNome" placeholder="Nome">
 						    </div>
 						  </div>
 						  <div class="form-group">
-						    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-						    <div class="col-sm-8">
-						      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-8">
-						      <button class="btn btn-primary">Sign in</button>
+						    <div class="col-sm-offset-2 col-sm-6">
+						      <button class="btn btn-primary">Confirmar</button>
 						    </div>
 						  </div>
 						</form>
 			        </div>
+			    	<div class="col-sm-2 col-xs-1 nopadding img-container"></div>
 			    </div>
 			</div>
 		</div>
@@ -135,8 +137,8 @@
 		     var form = this;
 		     
 		     var usuario = {
-		    	nome : $("input[id='inputPassword3']",form).val(),
-		    	email : $("input[id='inputEmail3']",form).val()
+		    	nome : $("input[id='inputNome']",form).val(),
+		    	email : $("input[id='inputEmail']",form).val()
 		     }
 		     
 		     //Obtemos os dados do usuario
