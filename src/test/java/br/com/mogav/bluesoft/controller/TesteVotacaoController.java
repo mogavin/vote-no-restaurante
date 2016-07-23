@@ -58,16 +58,20 @@ public class TesteVotacaoController {
 	}
 	
 	@Test
-	public void votar(){
+	public void votar(){		
+		Usuario comVotoRegistrado = mock(Usuario.class);
+		
 		//Necessário para ignorarmos o redirecionamento da validação
 		doReturn(mock(RankingController.class)).when(spyValidator).onErrorRedirectTo(RankingController.class);
+		
+		when(mockService.registrarVotos(USUARIO, VOTOS)).thenReturn(comVotoRegistrado);
 		
 		//Executamos o método a ser testado
 		this.controller.votar(USUARIO, VOTOS);		
 		
-		verify(mockService).registrarVotos(USUARIO, VOTOS);
-		//Asseguramos que ocorra redirecionamento para a página de rankings
-		verify(mockRankingController).index(USUARIO);
+		//Asseguramos que ocorra redirecionamento para a página de rankings, 
+		//com os dados do usuário comVotoRegistrado  
+		verify(mockRankingController).index(comVotoRegistrado);
 	}
 	
 	@Test(expected = ValidationException.class)

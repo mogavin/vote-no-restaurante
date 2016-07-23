@@ -46,7 +46,7 @@ public class VotacaoController {
 	public void votar(Usuario usuario, Collection<Voto> votos) {    	
     	
     	try{
-			this.service.registrarVotos(usuario, votos);
+    		usuario = this.service.registrarVotos(usuario, votos);
 		}catch(RuntimeException ex){
 			this.validator.add(new SimpleMessage("erro", ex.getMessage()));
 		}

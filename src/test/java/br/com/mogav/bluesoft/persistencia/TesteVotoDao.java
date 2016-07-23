@@ -18,16 +18,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.mogav.bluesoft.model.Restaurante;
-import br.com.mogav.bluesoft.model.Usuario;
-import br.com.mogav.bluesoft.model.Voto;
-import br.com.mogav.bluesoft.persistencia.UsuarioDao;
-import br.com.mogav.bluesoft.persistencia.VotoDao;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+
+import br.com.mogav.bluesoft.model.Restaurante;
+import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.model.Voto;
 
 //Não herda de BaseTesteDAO, pois precisa controlar mais de um DAO para efetuar os testes
 public class TesteVotoDao{
@@ -173,5 +171,5 @@ public class TesteVotoDao{
 		Map<Restaurante, Map<Integer, Integer>> respostaObtida = votoDao.obterDadosRankingUsuario(usuario_1);
 		
 		assertEquals(respostaEsperada, respostaObtida);
-	}	
+	}
 }

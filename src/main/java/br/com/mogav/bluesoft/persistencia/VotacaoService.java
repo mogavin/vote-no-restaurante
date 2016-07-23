@@ -8,17 +8,17 @@ import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import br.com.mogav.bluesoft.model.ItemRankingVotos;
-import br.com.mogav.bluesoft.model.Restaurante;
-import br.com.mogav.bluesoft.model.Usuario;
-import br.com.mogav.bluesoft.model.Voto;
-
 import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.ImmutableTable.Builder;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import com.google.common.collect.Table.Cell;
+
+import br.com.mogav.bluesoft.model.ItemRankingVotos;
+import br.com.mogav.bluesoft.model.Restaurante;
+import br.com.mogav.bluesoft.model.Usuario;
+import br.com.mogav.bluesoft.model.Voto;
 
 @RequestScoped
 public class VotacaoService {
@@ -40,7 +40,7 @@ public class VotacaoService {
 	}
 
 	
-	public boolean registrarVotos(Usuario usuario, Collection<Voto> votos){
+	public Usuario registrarVotos(Usuario usuario, Collection<Voto> votos){
 		
 		//Se for usuário novo, salva
 		Usuario encontrado = this.usuarioDao.buscarPorEmail(usuario.getEmail());
@@ -52,7 +52,7 @@ public class VotacaoService {
 
 		this.votoDao.salvarVotos(votosRegistrados);
 		
-		return true;		
+		return encontrado;		
 	}
 	
 	public List<ItemRankingVotos> listarRankingGeral() {		

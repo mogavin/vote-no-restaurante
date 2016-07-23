@@ -20,7 +20,13 @@
   </head>
   <body>
   	
-  	<div class="container-fluid">
+  	<div class="container-fluid">  		
+  		<div>
+	  		<c:forEach var="error" items="${errors}">
+			    ${error.category} - ${error.message}<br />
+			</c:forEach>
+		</div>
+  	
 		<table class="table table-hover">
 			<thead>
 				<tr>Ranking Geral</tr>		

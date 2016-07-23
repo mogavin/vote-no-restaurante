@@ -1,7 +1,6 @@
 package br.com.mogav.bluesoft.persistencia;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -57,9 +56,9 @@ public class TesteVotacaoService {
 		when(mockVotoDao.salvarVotos(argumentCaptor.capture())).thenReturn(Collections.<Voto>emptySet());
 		
 		//Executamos o método a ser testado
-		boolean respostaObtida = this.service.registrarVotos(USUARIO_CADASTRADO, VOTOS_NAO_REGISTRADOS);
+		Usuario respostaObtida = this.service.registrarVotos(USUARIO_CADASTRADO, VOTOS_NAO_REGISTRADOS);
 		
-		assertTrue(respostaObtida);
+		assertEquals(respostaObtida, USUARIO_CADASTRADO);
 		verify(mockUsuarioDao, never()).salvar(USUARIO_CADASTRADO);
 		
 		//Asseguramos que todos os votos foram registrados com o usuário
