@@ -14,6 +14,14 @@ public class Usuario extends Persistivel{
 	private final String email;
 
 	/**
+	 * @deprecated JPA eyes only
+	 */
+	//@Deprecated
+	Usuario(){
+		this(null, null);
+	}
+	
+	/**
 	 * Construtor padrão.
 	 */
 	public Usuario(String nome, String email) {

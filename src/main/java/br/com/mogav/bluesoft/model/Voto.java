@@ -17,6 +17,14 @@ public class Voto extends Persistivel{
 	private final Restaurante restaurante;
 	
 	/**
+	 * @deprecated JPA eyes only
+	 */
+	//@Deprecated
+	Voto(){
+		this(null, false, null);
+	}
+	
+	/**
 	 * Construtor padrão.
 	 */
 	public Voto(Usuario usuario, boolean isPositivo, Restaurante restaurante) {
