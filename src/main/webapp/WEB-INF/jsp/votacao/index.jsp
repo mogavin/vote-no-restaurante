@@ -63,6 +63,10 @@
 		     transform:scale(1.25);
 		}
 		
+		.com-margem-superior{
+			margin-top: 5%;
+		}
+		
     </style>
   </head>
   <body>
@@ -116,25 +120,34 @@
 			<div class="item">
 			    <div class="row container-fluid">
 			        <div class="col-sm-offset-2 col-sm-8 col-xs-12 nopadding img-container">
-			            <form id="form-usuario" class="form-horizontal">
-						  <div class="form-group">
-						    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-						    <div class="col-sm-8">
-						      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-						    </div>
-						  </div>
-  						  <div class="form-group">
-						    <label for="inputNome" class="col-sm-2 control-label">Nome</label>
-						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="inputNome" placeholder="Nome">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-6">
-						      <button class="btn btn-primary">Confirmar</button>
-						    </div>
-						  </div>
-						</form>
+			        	<div class="panel panel-primary com-margem-superior">
+					      <div class="panel-heading">
+					      	<h4>
+					      		Ok, finalizamos ! Obrigado pela sua opinião... (Poderia nos informar seus dados <i class="fa fa-smile-o" aria-hidden="true"></i> ?)
+					      	</h4>
+					      </div>
+		            	  <div class="panel-body">
+		            	  	<form id="form-usuario" class="form-horizontal">
+							  <div class="form-group">
+							    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+							    <div class="col-sm-8">
+							      <input type="email" class="form-control" id="inputEmail" placeholder="Email" required="true">
+							    </div>
+							  </div>
+	  						  <div class="form-group">
+							    <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="inputNome" placeholder="Nome" required="true">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-6">
+							      <button class="btn btn-primary">Confirmar</button>
+							    </div>
+							  </div>
+							</form>
+		            	  </div>								      
+					    </div>			            
 			        </div>
 			    </div>
 			</div>
