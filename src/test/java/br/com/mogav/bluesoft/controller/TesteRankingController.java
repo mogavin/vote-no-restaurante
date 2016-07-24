@@ -54,6 +54,7 @@ public class TesteRankingController {
 		//Executamos o método a ser testado
 		controller.index(USUARIO);
 		
+		assertEquals(USUARIO, spyResult.included().get("usuario"));
 		assertEquals(rankingGeral, spyResult.included().get("rankingGeral"));
 		assertEquals(rankingUsuario, spyResult.included().get("rankingUsuario"));
 	}

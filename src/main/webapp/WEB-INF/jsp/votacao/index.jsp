@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Vote no restaurante</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -61,12 +61,7 @@
 		    -ms-transform:scale(1.25); /* IE 9 */
 		    -o-transform:scale(1.25); /* Opera */
 		     transform:scale(1.25);
-		}
-		
-		.com-margem-superior{
-			margin-top: 5%;
-		}
-		
+		}		
     </style>
   </head>
   <body>
@@ -120,7 +115,7 @@
 			<div class="item">
 			    <div class="row container-fluid">
 			        <div class="col-sm-offset-2 col-sm-8 col-xs-12 nopadding img-container">
-			        	<div class="panel panel-primary com-margem-superior">
+			        	<div class="panel panel-primary">
 					      <div class="panel-heading">
 					      	<h4>
 					      		Ok, finalizamos ! Obrigado pela sua opinião... (Poderia nos informar seus dados <i class="fa fa-smile-o" aria-hidden="true"></i> ?)

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Ranking de restaurantes</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -21,47 +21,68 @@
   <body>
   	
   	<div class="container-fluid">  		
-  		<div>
+  		<div class="row">
 	  		<c:forEach var="error" items="${errors}">
 			    ${error.category} - ${error.message}<br />
 			</c:forEach>
 		</div>
-  	
-		<table class="table table-hover">
-			<thead>
-				<tr>Ranking Geral</tr>		
-				<tr>
-					<th>Posição</th>
-					<th>Restaurante</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="itemRankingGeral" items="${rankingGeral}" varStatus="status">
-					<tr>
-						<td>#${status.count}</td>
-						<td>${itemRankingGeral.restaurante}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		
-		<table class="table table-hover">
-			<thead>
-				<tr>Seu ranking</tr>		
-				<tr>
-					<th>Posição</th>
-					<th>Restaurante</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="itemRankingUsuario" items="${rankingUsuario}" varStatus="status">
-					<tr>
-						<td>#${status.count}</td>
-						<td>${itemRankingUsuario.restaurante}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+ 		<div class="row"> 			
+		    <div class="panel panel-primary">
+		    	<div class="panel-heading text-center">
+		      		<h4>Ranking Geral</h4>
+		      	</div>
+		      	<div class="panel-body">		    	
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Posição</th>
+								<th>Restaurante</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="itemRankingGeral" items="${rankingGeral}" varStatus="status">
+								<tr>
+									<td>#${status.count}</td>
+									<td>${itemRankingGeral.restaurante}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<c:if test="${not empty usuario.id}">
+			<div class="row">
+				<div class="panel panel-primary">
+					<div class="panel-heading text-center">
+			      		<h4>Seu ranking, ${usuario.nome}</h4>
+			      	</div>
+			      	<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Posição</th>
+									<th>Restaurante</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="itemRankingUsuario" items="${rankingUsuario}" varStatus="status">
+									<tr>
+										<td>#${status.count}</td>
+										<td>${itemRankingUsuario.restaurante}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</c:if>
+		<div class="row text-center">
+			<a class="btn btn-primary col-xs-12 col-md-offset-5 col-md-2" href="<c:url value="/"/>" role="button">
+				Votar<c:if test="${not empty usuario.id}"> novamente</c:if>
+			</a>
+		</div>
 	</div>
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

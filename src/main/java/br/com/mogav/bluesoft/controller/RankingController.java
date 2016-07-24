@@ -37,6 +37,7 @@ public class RankingController {
 		Collection<ItemRankingVotos> rankingUsuario = this.service.listarRankingUsuario(usuario);
 		Collection<ItemRankingVotos> rankingGeral = this.service.listarRankingGeral();
 
+		this.result.include("usuario", usuario);
 		this.result.include("rankingUsuario", rankingUsuario);
 		this.result.include("rankingGeral", rankingGeral);
 	}
