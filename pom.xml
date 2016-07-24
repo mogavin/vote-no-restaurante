@@ -43,10 +43,10 @@
 	  <profile>
 	    <id>bluesoft</id>
 	    <properties>
-	      <javax.persistence.jdbc.user>bluesoft_andre</javax.persistence.jdbc.user>
-	      <javax.persistence.jdbc.password>softblue</javax.persistence.jdbc.password>
+	      <javax.persistence.jdbc.user>admin48JHmIl</javax.persistence.jdbc.user>
+	      <javax.persistence.jdbc.password>dnTNQ6VpVU6H</javax.persistence.jdbc.password>
 	      <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
-	      <javax.persistence.jdbc.url>jdbc:mysql://162.144.115.91:3306/bluesoft</javax.persistence.jdbc.url>
+	      <javax.persistence.jdbc.url>jdbc:mysql://127.12.19.2:3306/votenorestaurante</javax.persistence.jdbc.url>
 	      <hibernate.cache.provider_class>org.hibernate.cache.NoCacheProvider</hibernate.cache.provider_class>
 	      <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
 	      <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>

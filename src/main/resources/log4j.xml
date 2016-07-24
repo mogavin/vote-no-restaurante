@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} %5p [%-20c{1}] %m%n" />
+        </layout>
+    </appender>
+    <!-- Filtra apenas os erros e escreve no arquivo ${catalina.home}/logs/errors.log -->
+    <appender name="FILE_ERRORS" class="org.apache.log4j.RollingFileAppender">
+	   <param name="file" value="${catalina.home}/logs/errors.log"/>
+	   <param name="maxFileSize" value="5MB"/>
+	   <param name="maxBackupIndex" value="10"/>
+	   <param name="Threshold" value="ERROR"/>   
+	   <layout class="org.apache.log4j.PatternLayout">
+	      <param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} %5p [%-20c{1}] %m%n" />
+	   </layout>
+	</appender>
+
+    <category name="br.com.caelum.vraptor">
+        <priority value="DEBUG" />
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="FILE_ERRORS" />       
+    </category>
+    <category name="org.hibernate">
+    	<priority value="INFO" />
+	  	<appender-ref ref="stdout"/>
+  		<appender-ref ref="FILE_ERRORS" />
+	</category>
+	<category name="br.com.mogav.bluesoft">
+	  	<priority value="DEBUG" />
+	  	<appender-ref ref="stdout"/>
+	  	<appender-ref ref="FILE_ERRORS"/>
+	</category>
+</log4j:configuration>
